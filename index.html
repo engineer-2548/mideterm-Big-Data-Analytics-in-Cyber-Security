@@ -3,172 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบฝึกหัดทบทวน Big Data Analytics in Cybersecurity</title>
+    <title>แบบฝึกหัดทบทวน Cybersecurity & Big Data Analytics</title>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --accent-color: #10b981;
-            --bg-color: #ffffff;
-            --text-color: #1f2937;
-            --border-color: #e5e7eb;
-            --card-bg: #f9fafb;
-            --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-hover: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-        }
-
-        [data-theme="dark"] {
-            --primary-color: #60a5fa;
-            --secondary-color: #3b82f6;
-            --accent-color: #34d399;
-            --bg-color: #111827;
-            --text-color: #f3f4f6;
-            --border-color: #374151;
-            --card-bg: #1f2937;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #ffffff;
+            --bg-dark: #1a202c;
+            --card-bg: #f7fafc;
+            --border-color: #e2e8f0;
+            --success-color: #48bb78;
+            --warning-color: #f6ad55;
+            --danger-color: #fc8181;
+        }
+
+        [data-theme="dark"] {
+            --text-dark: #f7fafc;
+            --text-light: #cbd5e0;
+            --bg-light: #1a202c;
+            --card-bg: #2d3748;
+            --border-color: #4a5568;
+        }
+
         body {
             font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
             transition: all 0.3s ease;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            animation: slideDown 0.5s ease;
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(45, 55, 72, 0.95);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1em;
+        }
+
+        .controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .header h1 {
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        [data-theme="dark"] .controls {
+            background: rgba(45, 55, 72, 0.95);
         }
 
-        .header-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        /* Search Bar */
-        .search-container {
+        .search-box {
+            flex: 1;
+            min-width: 250px;
             position: relative;
         }
 
-        .search-input {
-            padding: 0.5rem 2.5rem 0.5rem 1rem;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            width: 250px;
+        .search-box input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 16px;
             transition: all 0.3s ease;
+            background: var(--bg-light);
+            color: var(--text-dark);
         }
 
-        .search-input::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .search-input:focus {
+        .search-box input:focus {
             outline: none;
-            background: rgba(255,255,255,0.3);
-            width: 300px;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .search-icon {
             position: absolute;
-            right: 10px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: white;
+            color: var(--text-light);
         }
 
-        /* Theme Toggle */
-        .theme-toggle {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
-            padding: 0.5rem 1rem;
-            color: white;
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .theme-toggle:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.05);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
         }
 
-        /* Navigation */
-        .nav-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border-color);
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 15px;
         }
 
         .nav-tabs {
             display: flex;
-            gap: 0.5rem;
+            gap: 10px;
+            margin-bottom: 30px;
             overflow-x: auto;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-color);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .nav-tabs {
+            background: rgba(45, 55, 72, 0.95);
         }
 
         .nav-tab {
-            padding: 0.75rem 1.5rem;
-            background: var(--card-bg);
-            border: none;
-            border-radius: 8px 8px 0 0;
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid transparent;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
-            font-size: 0.95rem;
-            color: var(--text-color);
+            font-weight: 600;
         }
 
         .nav-tab:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
+            background: var(--card-bg);
         }
 
         .nav-tab.active {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            font-weight: bold;
-        }
-
-        /* Main Content */
-        .content-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            border-color: transparent;
         }
 
         .chapter {
@@ -181,844 +231,1017 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .chapter-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-
-        .chapter-header h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Question Cards */
         .question-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border-left: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .question-card {
+            background: rgba(45, 55, 72, 0.95);
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
         .question-card:hover {
-            box-shadow: var(--shadow-hover);
             transform: translateX(5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .question-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
+            align-items: start;
+            margin-bottom: 15px;
             cursor: pointer;
         }
 
         .question-number {
-            background: var(--primary-color);
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: 5px 15px;
             border-radius: 20px;
             font-weight: bold;
-            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-size: 0.9em;
         }
 
         .question-text {
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.6;
+            flex: 1;
         }
 
-        .answer-section {
-            background: var(--bg-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1rem;
+        .bookmark-btn {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            padding: 5px;
         }
 
-        .answer-label {
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .bookmark-btn.bookmarked {
+            color: var(--warning-color);
+        }
+
+        .bookmark-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .answer {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 2000px;
+            }
         }
 
         .answer-content {
-            color: var(--text-color);
+            color: var(--text-dark);
             line-height: 1.8;
-            white-space: pre-wrap;
+            font-size: 1.05em;
         }
 
-        .answer-content ul, .answer-content ol {
-            margin-left: 2rem;
-            margin-top: 0.5rem;
+        .answer-content strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .answer-content ul {
+            margin: 15px 0;
+            padding-left: 30px;
         }
 
         .answer-content li {
-            margin-bottom: 0.5rem;
+            margin: 10px 0;
+            list-style-type: none;
+            position: relative;
+            padding-left: 25px;
         }
 
-        .reference {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-            color: var(--text-color);
-            opacity: 0.7;
-        }
-
-        /* Collapsible Answer */
-        .toggle-answer {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .toggle-answer:hover {
-            background: var(--secondary-color);
-            transform: scale(1.05);
-        }
-
-        .answer-collapsed {
-            display: none;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-hover);
-            z-index: 50;
-        }
-
-        .progress-text {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+        .answer-content li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
             font-weight: bold;
         }
 
-        .progress-bar {
-            width: 200px;
-            height: 8px;
-            background: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
+        .reference {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: var(--card-bg);
+            border-left: 3px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: var(--text-light);
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            transition: width 0.3s ease;
-        }
-
-        /* Highlight for search */
         .highlight {
-            background: yellow;
-            color: black;
-            padding: 2px;
+            background: linear-gradient(120deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            padding: 2px 5px;
             border-radius: 3px;
+            font-weight: 600;
         }
 
-        /* Mobile Responsive */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .stats {
+            background: rgba(45, 55, 72, 0.95);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .floating-menu {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .floating-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.3rem;
+            h1 {
+                font-size: 1.8em;
             }
 
-            .search-input {
-                width: 200px;
+            .controls {
+                flex-direction: column;
             }
 
-            .search-input:focus {
-                width: 220px;
+            .search-box {
+                width: 100%;
             }
 
             .nav-tabs {
                 flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+                overflow-x: scroll;
             }
 
-            .chapter-header h2 {
-                font-size: 1.4rem;
-            }
-
-            .question-card {
-                padding: 1rem;
-            }
-
-            .progress-container {
-                bottom: 10px;
-                right: 10px;
-                padding: 0.75rem;
+            .floating-menu {
+                bottom: 20px;
+                right: 20px;
             }
         }
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
+        .progress-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 30px;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: var(--text-color);
-            color: var(--bg-color);
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <h1>
-                <span>📚</span>
-                <span>Big Data Analytics in Cybersecurity</span>
-            </h1>
-            <div class="header-controls">
-                <div class="search-container">
-                    <input type="text" class="search-input" id="searchInput" placeholder="ค้นหาเนื้อหา...">
-                    <span class="search-icon">🔍</span>
-                </div>
-                <button class="theme-toggle" id="themeToggle">
+    <div class="container">
+        <header>
+            <h1>📚 แบบฝึกหัดทบทวนก่อนสอบกลางภาค</h1>
+            <p class="subtitle">Big Data Analytics in Cybersecurity</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value">14</div>
+                <div class="stat-label">คำถามทั้งหมด</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">5</div>
+                <div class="stat-label">บทเรียน</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="bookmarkCount">0</div>
+                <div class="stat-label">บุ๊คมาร์ค</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="progressPercent">0%</div>
+                <div class="stat-label">ความคืบหน้า</div>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 ค้นหาคำถามหรือคำตอบ...">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="btn-group">
+                <button class="btn-primary" onclick="toggleAllAnswers()">
+                    <span id="toggleAllText">📖 แสดงคำตอบทั้งหมด</span>
+                </button>
+                <button class="btn-secondary" onclick="showBookmarked()">
+                    ⭐ ดูบุ๊คมาร์ค
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
                     <span id="themeIcon">🌙</span>
                 </button>
             </div>
         </div>
-    </header>
 
-    <!-- Navigation Tabs -->
-    <div class="nav-container">
         <div class="nav-tabs">
-            <button class="nav-tab active" data-chapter="chapter1">Chapter 1: Big Data Analytics</button>
-            <button class="nav-tab" data-chapter="chapter2">Chapter 2: Cybersecurity Framework</button>
-            <button class="nav-tab" data-chapter="chapter3">Chapter 3: Threats & Risks</button>
-            <button class="nav-tab" data-chapter="chapter4">Chapter 4: Incident Management</button>
-            <button class="nav-tab" data-chapter="chapter5">Chapter 5: IDS/IPS</button>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content-container">
-        <!-- Chapter 1 -->
-        <div class="chapter active" id="chapter1">
-            <div class="chapter-header">
-                <h2>Chapter 1: Introduction to Big Data Analytics in Cybersecurity</h2>
-                <p>เนื้อหาครอบคลุม Data Analytics, Data Science และคุณลักษณะของ Big Data</p>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 1</span>
-                </div>
-                <div class="question-text">Data Analytics กับ Data Science แตกต่างกันอย่างไร (อธิบายมาพอสังเขป)</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content"><strong>Data Analytics (การวิเคราะห์ข้อมูล):</strong> คือศาสตร์ของการวิเคราะห์ข้อมูลดิบ (Raw Data) เพื่อหาข้อสรุปจากข้อมูลนั้นๆ โดยมุ่งเน้นการใช้สถิติเชิงพรรณนาพื้นฐาน (Basic Descriptive Statistics) สร้างภาพข้อมูล (Data Visualization) และสื่อสารผลลัพธ์เพื่อให้เกิดความเข้าใจและนำไปสู่การตัดสินใจทางธุรกิจ นักวิเคราะห์ข้อมูล (Data Analyst) จะทำงานกับข้อมูลที่มีโครงสร้าง (Structured Data) เป็นหลัก เพื่อค้นหาข้อมูลเชิงลึก (Business Insight) สำหรับการตัดสินใจและวางกลยุทธ์
-
-<strong>Data Science (วิทยาศาสตร์ข้อมูล):</strong> เป็นศาสตร์ที่กว้างกว่า โดยครอบคลุมกระบวนการทั้งหมดตั้งแต่การจัดการกับข้อมูลขนาดใหญ่ (Big Data) ซึ่งรวมถึงการทำความสะอาดข้อมูล (Data Cleansing) การเตรียมข้อมูล (Preparation) และการวิเคราะห์ นักวิทยาศาสตร์ข้อมูล (Data Scientist) จะรวบรวมข้อมูลจากหลายแหล่งและใช้เทคนิคขั้นสูง เช่น Machine Learning, Predictive Analytics และ Sentiment Analysis เพื่อสกัดข้อมูลที่สำคัญออกมา นอกจากนี้ยังทำงานได้ทั้งกับข้อมูลที่มีโครงสร้าง (Structured Data) และไม่มีโครงสร้าง (Unstructured Data) เพื่อพัฒนาโมเดลและเครื่องมือที่ช่วยตอบโจทย์ทางธุรกิจ</div>
-                    <div class="reference">📖 อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 3-6)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 2</span>
-                </div>
-                <div class="question-text">อธิบายประเภทการวิเคราะห์ข้อมูล (Types of Data Analytics) ทั้ง 4 ระดับ มาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">ประเภทการวิเคราะห์ข้อมูลมี 4 ระดับ ดังนี้
-
-<strong>1. Descriptive Analytics (การวิเคราะห์เชิงพรรณนา):</strong> เป็นการวิเคราะห์เพื่อตอบคำถามว่า "เกิดอะไรขึ้น" (What happened?) โดยจะสรุปข้อมูลในอดีตให้อยู่ในรูปแบบที่เข้าใจง่าย เช่น การทำรายงานสรุปยอดขาย, แดชบอร์ดแสดงผลข้อมูล
-
-<strong>2. Diagnostic Analytics (การวิเคราะห์เชิงวินิจฉัย):</strong> เป็นการวิเคราะห์เพื่อตอบคำถามว่า "ทำไมสิ่งนั้นถึงเกิดขึ้น" (Why did it happen?) เป็นการเจาะลึกลงไปในข้อมูลเพื่อหาสาเหตุของเหตุการณ์ที่เกิดขึ้น เช่น การวิเคราะห์หาสาเหตุที่ทำให้ยอดขายลดลง
-
-<strong>3. Predictive Analytics (การวิเคราะห์เชิงพยากรณ์):</strong> เป็นการวิเคราะห์เพื่อตอบคำถามว่า "จะเกิดอะไรขึ้นในอนาคต" (What will happen?) โดยใช้ข้อมูลในอดีตมาสร้างแบบจำลองเพื่อทำนายแนวโน้มในอนาคต เช่น การพยากรณ์ยอดขายในไตรมาสถัดไป
-
-<strong>4. Prescriptive Analytics (การวิเคราะห์เชิงให้คำแนะนำ):</strong> เป็นการวิเคราะห์เพื่อตอบคำถามว่า "ควรจะทำอย่างไร" (What should we do?) หรือ "ถ้าทำแบบนี้จะเกิดอะไรขึ้น" เป็นขั้นที่สูงที่สุด โดยระบบจะให้คำแนะนำทางเลือกที่ดีที่สุดเพื่อนำไปปฏิบัติจริง เช่น การแนะนำโปรโมชันที่เหมาะสมกับลูกค้าแต่ละรายเพื่อเพิ่มยอดขาย</div>
-                    <div class="reference">📖 อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 7)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 3</span>
-                </div>
-                <div class="question-text">คุณลักษณะสำคัญของ Big Data ทั้ง 5V ประกอบด้วยอะไร พร้อมอธิบายมาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">คุณลักษณะสำคัญของ Big Data (5V's) ประกอบด้วย
-
-<strong>1. Volume (ปริมาณ):</strong> ข้อมูลมีขนาดใหญ่มากในระดับ Terabytes ถึง Zettabytes ซึ่งท้าทายต่อการจัดเก็บและประมวลผลด้วยวิธีการแบบดั้งเดิม
-
-<strong>2. Velocity (ความเร็ว):</strong> ข้อมูลถูกสร้างขึ้นและเปลี่ยนแปลงอย่างรวดเร็วแบบเรียลไทม์ (Real-time) หรือใกล้เคียงเรียลไทม์ ทำให้ต้องมีการประมวลผลที่รวดเร็วเพื่อให้ทันต่อสถานการณ์
-
-<strong>3. Variety (ความหลากหลาย):</strong> ข้อมูลมีรูปแบบที่หลากหลาย ทั้งข้อมูลที่มีโครงสร้าง (Structured Data) เช่น ข้อมูลในตาราง, กึ่งมีโครงสร้าง (Semi-structured Data) เช่น ไฟล์ XML, และไม่มีโครงสร้าง (Unstructured Data) เช่น ข้อความ, รูปภาพ, วิดีโอ
-
-<strong>4. Veracity (ความถูกต้อง):</strong> ข้อมูลมีความไม่แน่นอน อาจมีความไม่สอดคล้องกัน ข้อมูลที่ไม่สมบูรณ์ หรือความคลุมเครือ ซึ่งต้องมีการตรวจสอบและยืนยันความถูกต้องของข้อมูลก่อนนำไปใช้
-
-<strong>5. Value (คุณค่า):</strong> ข้อมูลที่มีอยู่จะต้องสามารถนำมาวิเคราะห์เพื่อสร้างประโยชน์หรือคุณค่าให้กับองค์กรได้ เช่น การสร้างรายได้, การลดต้นทุน, หรือการปรับปรุงการบริการ</div>
-                    <div class="reference">📖 อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 8-10)</div>
-                </div>
-            </div>
+            <button class="nav-tab active" onclick="showChapter('all')">ทั้งหมด</button>
+            <button class="nav-tab" onclick="showChapter('ch1')">Chapter 1</button>
+            <button class="nav-tab" onclick="showChapter('ch2')">Chapter 2</button>
+            <button class="nav-tab" onclick="showChapter('ch3')">Chapter 3</button>
+            <button class="nav-tab" onclick="showChapter('ch4')">Chapter 4</button>
+            <button class="nav-tab" onclick="showChapter('ch5')">Chapter 5</button>
         </div>
 
-        <!-- Chapter 2 -->
-        <div class="chapter" id="chapter2">
-            <div class="chapter-header">
-                <h2>Chapter 2: Cybersecurity Framework & Cyber Attack Framework</h2>
-                <p>เนื้อหาครอบคลุม NIST Cybersecurity Framework 2.0 และ Cyber Kill Chain</p>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 4</span>
-                </div>
-                <div class="question-text">NIST Cybersecurity Framework 2.0 ประกอบด้วยฟังก์ชันหลักคืออะไร พร้อมอธิบายแต่ละฟังก์ชันของเฟรมเวิร์กมาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
+        <div id="content">
+            <!-- Chapter 1 -->
+            <div class="chapter active" id="all">
+                <!-- Question 1 -->
+                <div class="question-card" data-chapter="ch1">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 1 - Chapter 1</span>
+                            <div class="question-text">Data Analytics กับ Data Science แตกต่างกันอย่างไร?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
                     </div>
-                    <div class="answer-content">NIST Cybersecurity Framework (CSF) 2.0 ประกอบด้วย 6 ฟังก์ชันหลัก ดังนี้
-
-<strong>1. Govern (การกำกับดูแล):</strong> เป็นฟังก์ชันที่เพิ่มขึ้นมาใหม่ เน้นการสร้างและกำกับดูแลกลยุทธ์, ความคาดหวัง และนโยบายการจัดการความเสี่ยงด้านความมั่นคงปลอดภัยไซเบอร์ขององค์กร เพื่อให้สอดคล้องกับเป้าหมายทางธุรกิจโดยรวม
-
-<strong>2. Identify (การระบุ):</strong> การทำความเข้าใจบริบททางธุรกิจ, ทรัพย์สิน (Assets) ที่สำคัญ และความเสี่ยงด้านความมั่นคงปลอดภัยไซเบอร์ที่เกี่ยวข้อง เพื่อใช้ในการบริหารจัดการความเสี่ยง
-
-<strong>3. Protect (การป้องกัน):</strong> การใช้มาตรการป้องกันที่เหมาะสมเพื่อจำกัดหรือควบคุมผลกระทบจากเหตุการณ์ความมั่นคงปลอดภัยไซเบอร์ เพื่อให้การบริการที่สำคัญดำเนินไปได้อย่างต่อเนื่อง
-
-<strong>4. Detect (การตรวจจับ):</strong> การพัฒนาและใช้กิจกรรมที่เหมาะสมเพื่อตรวจจับการเกิดขึ้นของเหตุการณ์ความมั่นคงปลอดภัยไซเบอร์ได้อย่างทันท่วงที
-
-<strong>5. Respond (การตอบสนอง):</strong> การดำเนินการที่เหมาะสมเมื่อตรวจพบเหตุการณ์ความมั่นคงปลอดภัยไซเบอร์ เพื่อควบคุมผลกระทบของเหตุการณ์
-
-<strong>6. Recover (การฟื้นฟู):</strong> การวางแผนและดำเนินการเพื่อฟื้นฟูความสามารถและบริการที่ได้รับผลกระทบจากเหตุการณ์ความมั่นคงปลอดภัยไซเบอร์ให้กลับสู่ภาวะปกติ</div>
-                    <div class="reference">📖 อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 11-17)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 5</span>
-                </div>
-                <div class="question-text">ขั้นตอนทั้ง 5 ของการสร้าง Cybersecurity Framework (CSF) Organizational Profile ตามหลักการของ NIST ประกอบอะไร</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>Data Analytics (การวิเคราะห์ข้อมูล):</strong></p>
+                            <ul>
+                                <li>ศาสตร์ของการวิเคราะห์ข้อมูลดิบ (Raw Data) เพื่อหาข้อสรุป</li>
+                                <li>มุ่งเน้นการใช้สถิติเชิงพรรณนาพื้นฐาน และ Data Visualization</li>
+                                <li>ทำงานกับข้อมูลที่มีโครงสร้าง (Structured Data) เป็นหลัก</li>
+                                <li>เพื่อค้นหา Business Insight สำหรับการตัดสินใจ</li>
+                            </ul>
+                            <p><strong>Data Science (วิทยาศาสตร์ข้อมูล):</strong></p>
+                            <ul>
+                                <li>ศาสตร์ที่กว้างกว่า ครอบคลุมทั้งกระบวนการจัดการ Big Data</li>
+                                <li>รวมถึง Data Cleansing, Preparation และการวิเคราะห์</li>
+                                <li>ใช้เทคนิคขั้นสูง เช่น Machine Learning, Predictive Analytics</li>
+                                <li>ทำงานได้ทั้ง Structured และ Unstructured Data</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 3-6)</div>
+                        </div>
                     </div>
-                    <div class="answer-content">ขั้นตอนทั้ง 5 ของการสร้างและใช้ CSF Organizational Profile ประกอบด้วย
-
-<strong>1. Scope the Organizational Profile (กำหนดขอบเขต):</strong> กำหนดขอบเขตของ Profile ว่าจะครอบคลุมทั้งองค์กรหรือเฉพาะส่วนงานใดส่วนงานหนึ่ง
-
-<strong>2. Gather needed information (รวบรวมข้อมูลที่จำเป็น):</strong> รวบรวมข้อมูลที่เกี่ยวข้องกับกระบวนการ, นโยบาย, และแนวปฏิบัติในการรักษาความมั่นคงปลอดภัยไซเบอร์ในปัจจุบัน
-
-<strong>3. Create the Organizational Profile (สร้าง Profile):</strong> สร้าง Profile ของสถานะปัจจุบัน (Current State) และสถานะที่ต้องการ (Target State) โดยเทียบกับ Categories และ Subcategories ใน Framework Core
-
-<strong>4. Analyze gaps and create an action plan (วิเคราะห์ช่องว่างและสร้างแผนปฏิบัติการ):</strong> เปรียบเทียบระหว่าง Current Profile และ Target Profile เพื่อระบุช่องว่าง (Gaps) และจัดลำดับความสำคัญในการดำเนินการ พร้อมทั้งสร้างแผนปฏิบัติการ (Action Plan) เพื่อลดช่องว่างนั้น
-
-<strong>5. Implement action plan and update Profile (ดำเนินการตามแผนและปรับปรุง Profile):</strong> นำแผนปฏิบัติการไปใช้ และปรับปรุง Profile อย่างสม่ำเสมอตามการเปลี่ยนแปลงขององค์กรและสภาพแวดล้อม</div>
-                    <div class="reference">📖 อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 27)</div>
                 </div>
-            </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 6</span>
-                </div>
-                <div class="question-text">อธิบายแต่ละขั้นตอนใน Cyber Kill Chain framework มาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
+                <!-- Question 2 -->
+                <div class="question-card" data-chapter="ch1">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 2 - Chapter 1</span>
+                            <div class="question-text">อธิบายประเภทการวิเคราะห์ข้อมูล (Types of Data Analytics) ทั้ง 4 ระดับ</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
                     </div>
-                    <div class="answer-content">Cyber Kill Chain framework มี 7 ขั้นตอนที่ผู้โจมตีต้องดำเนินการเพื่อให้บรรลุเป้าหมาย ดังนี้
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>1. Descriptive Analytics (การวิเคราะห์เชิงพรรณนา):</strong></p>
+                            <ul>
+                                <li>ตอบคำถาม "เกิดอะไรขึ้น" (What happened?)</li>
+                                <li>สรุปข้อมูลในอดีตให้เข้าใจง่าย เช่น รายงานยอดขาย, แดชบอร์ด</li>
+                            </ul>
+                            <p><strong>2. Diagnostic Analytics (การวิเคราะห์เชิงวินิจฉัย):</strong></p>
+                            <ul>
+                                <li>ตอบคำถาม "ทำไมถึงเกิดขึ้น" (Why did it happen?)</li>
+                                <li>เจาะลึกหาสาเหตุของเหตุการณ์</li>
+                            </ul>
+                            <p><strong>3. Predictive Analytics (การวิเคราะห์เชิงพยากรณ์):</strong></p>
+                            <ul>
+                                <li>ตอบคำถาม "จะเกิดอะไรขึ้น" (What will happen?)</li>
+                                <li>ใช้ข้อมูลอดีตสร้างแบบจำลองทำนายอนาคต</li>
+                            </ul>
+                            <p><strong>4. Prescriptive Analytics (การวิเคราะห์เชิงให้คำแนะนำ):</strong></p>
+                            <ul>
+                                <li>ตอบคำถาม "ควรทำอย่างไร" (What should we do?)</li>
+                                <li>ให้คำแนะนำทางเลือกที่ดีที่สุด</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 7)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>1. Reconnaissance (การลาดตระเวน):</strong> ผู้โจมตีรวบรวมข้อมูลเกี่ยวกับเป้าหมาย เช่น ที่อยู่อีเมล, ข้อมูลองค์กร, ช่องโหว่ของระบบ เพื่อวางแผนการโจมตี
+                <!-- Question 3 -->
+                <div class="question-card" data-chapter="ch1">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 3 - Chapter 1</span>
+                            <div class="question-text">คุณลักษณะสำคัญของ Big Data ทั้ง 5V ประกอบด้วยอะไร?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>5V's ของ Big Data:</strong></p>
+                            <ul>
+                                <li><span class="highlight">Volume (ปริมาณ):</span> ข้อมูลขนาดใหญ่ระดับ TB ถึง ZB</li>
+                                <li><span class="highlight">Velocity (ความเร็ว):</span> ข้อมูลถูกสร้างและเปลี่ยนแปลงแบบ Real-time</li>
+                                <li><span class="highlight">Variety (ความหลากหลาย):</span> ข้อมูลหลายรูปแบบ (Structured, Semi-structured, Unstructured)</li>
+                                <li><span class="highlight">Veracity (ความถูกต้อง):</span> ความไม่แน่นอนและความไม่สมบูรณ์ของข้อมูล</li>
+                                <li><span class="highlight">Value (คุณค่า):</span> ข้อมูลต้องสร้างประโยชน์ให้องค์กร</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 8-10)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>2. Weaponization (การสร้างอาวุธ):</strong> ผู้โจมตีสร้าง "อาวุธ" หรือมัลแวร์ (Malware) โดยใช้ช่องโหว่ (Exploit) ที่พบร่วมกับ Backdoor เพื่อสร้าง Payload ที่สามารถส่งไปยังเป้าหมายได้
+                <!-- Question 4 -->
+                <div class="question-card" data-chapter="ch2">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 4 - Chapter 2</span>
+                            <div class="question-text">NIST Cybersecurity Framework 2.0 ประกอบด้วยฟังก์ชันหลักอะไรบ้าง?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>6 ฟังก์ชันหลักของ NIST CSF 2.0:</strong></p>
+                            <ul>
+                                <li><span class="highlight">Govern (การกำกับดูแล):</span> สร้างกลยุทธ์และนโยบายความมั่นคงปลอดภัย</li>
+                                <li><span class="highlight">Identify (การระบุ):</span> ทำความเข้าใจทรัพย์สินและความเสี่ยง</li>
+                                <li><span class="highlight">Protect (การป้องกัน):</span> ใช้มาตรการป้องกันที่เหมาะสม</li>
+                                <li><span class="highlight">Detect (การตรวจจับ):</span> ตรวจจับเหตุการณ์ความมั่นคงปลอดภัย</li>
+                                <li><span class="highlight">Respond (การตอบสนอง):</span> ดำเนินการเมื่อตรวจพบเหตุการณ์</li>
+                                <li><span class="highlight">Recover (การฟื้นฟู):</span> ฟื้นฟูความสามารถและบริการ</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 11-17)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>3. Delivery (การนำส่ง):</strong> ผู้โจมตีส่งอาวุธที่สร้างขึ้นไปยังเป้าหมายผ่านช่องทางต่างๆ เช่น อีเมล (Phishing), เว็บไซต์, หรือ USB Drive
+                <!-- Question 5 -->
+                <div class="question-card" data-chapter="ch2">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 5 - Chapter 2</span>
+                            <div class="question-text">ขั้นตอนการสร้าง CSF Organizational Profile ตาม NIST มีอะไรบ้าง?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>5 ขั้นตอนการสร้าง CSF Organizational Profile:</strong></p>
+                            <ul>
+                                <li><strong>1. Scope the Organizational Profile:</strong> กำหนดขอบเขตของ Profile</li>
+                                <li><strong>2. Gather needed information:</strong> รวบรวมข้อมูลที่จำเป็น</li>
+                                <li><strong>3. Create the Organizational Profile:</strong> สร้าง Current และ Target State</li>
+                                <li><strong>4. Analyze gaps and create action plan:</strong> วิเคราะห์ช่องว่างและสร้างแผน</li>
+                                <li><strong>5. Implement action plan and update Profile:</strong> ดำเนินการและปรับปรุง</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 27)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>4. Exploitation (การใช้ช่องโหว่โจมตี):</strong> เมื่ออาวุธถูกส่งถึงเป้าหมายและถูกเปิดใช้งาน มันจะใช้ประโยชน์จากช่องโหว่ของซอฟต์แวร์หรือระบบปฏิบัติการเพื่อรันโค้ดของผู้โจมตี
+                <!-- Question 6 -->
+                <div class="question-card" data-chapter="ch2">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 6 - Chapter 2</span>
+                            <div class="question-text">อธิบายแต่ละขั้นตอนใน Cyber Kill Chain framework</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>7 ขั้นตอนของ Cyber Kill Chain:</strong></p>
+                            <ul>
+                                <li><span class="highlight">1. Reconnaissance:</span> การลาดตระเวนรวบรวมข้อมูลเป้าหมาย</li>
+                                <li><span class="highlight">2. Weaponization:</span> สร้างมัลแวร์หรืออาวุธโจมตี</li>
+                                <li><span class="highlight">3. Delivery:</span> ส่งอาวุธไปยังเป้าหมาย (อีเมล, USB)</li>
+                                <li><span class="highlight">4. Exploitation:</span> ใช้ช่องโหว่โจมตีระบบ</li>
+                                <li><span class="highlight">5. Installation:</span> ติดตั้งมัลแวร์ในเครื่องเหยื่อ</li>
+                                <li><span class="highlight">6. Command & Control (C2):</span> สร้างช่องทางควบคุมระยะไกล</li>
+                                <li><span class="highlight">7. Actions on Objectives:</span> ดำเนินการตามเป้าหมาย (ขโมยข้อมูล, เรียกค่าไถ่)</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 37-45)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>5. Installation (การติดตั้ง):</strong> มัลแวร์จะทำการติดตั้งตัวเองลงในเครื่องของเหยื่อ เพื่อให้สามารถคงอยู่และทำงานในระบบต่อไปได้แม้จะมีการรีสตาร์ทเครื่อง
+                <!-- Question 7 -->
+                <div class="question-card" data-chapter="ch3">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 7 - Chapter 3</span>
+                            <div class="question-text">ความแตกต่างระหว่าง Information Security และ Cybersecurity คืออะไร?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>Information Security:</strong></p>
+                            <ul>
+                                <li>ปกป้อง "สารสนเทศ" ทุกรูปแบบ (Digital & Analog)</li>
+                                <li>รวมถึงเอกสารกระดาษและข้อมูลกายภาพ</li>
+                                <li>ยึดหลัก CIA Triad (Confidentiality, Integrity, Availability)</li>
+                                <li>มีขอบเขตกว้างครอบคลุมข้อมูลทุกประเภท</li>
+                            </ul>
+                            <p><strong>Cybersecurity:</strong></p>
+                            <ul>
+                                <li>เป็นส่วนหนึ่งของ Information Security</li>
+                                <li>มุ่งเน้นปกป้อง "สินทรัพย์ในโลกไซเบอร์"</li>
+                                <li>ป้องกันการโจมตีทางดิจิทัล</li>
+                                <li>ครอบคลุมระบบคอมพิวเตอร์, เครือข่าย, โปรแกรม</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 4-8)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>6. Command & Control (C2) (การสั่งการและควบคุม):</strong> มัลแวร์จะสร้างช่องทางการสื่อสารกลับไปยังเซิร์ฟเวอร์ของผู้โจมตี เพื่อรอรับคำสั่งและควบคุมเครื่องของเหยื่อจากระยะไกล
+                <!-- Question 8 -->
+                <div class="question-card" data-chapter="ch3">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 8 - Chapter 3</span>
+                            <div class="question-text">Deepfake Attack คืออะไร พร้อมตัวอย่างและแนวทางป้องกัน</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>Deepfake Attack:</strong> การใช้ AI/Deep Learning สร้างสื่อปลอมแปลง (วิดีโอ, เสียง, รูปภาพ) ที่ดูสมจริง</p>
+                            
+                            <p><strong>ตัวอย่างการโจมตี:</strong></p>
+                            <ul>
+                                <li>ปลอมวิดีโอบุคคลมีชื่อเสียง (เช่น Elon Musk) โปรโมตการลงทุนหลอกลวง</li>
+                                <li>ใช้ชักชวนให้สแกน QR Code เพื่อโอนเงิน</li>
+                            </ul>
+                            
+                            <p><strong>แนวทางการป้องกัน:</strong></p>
+                            <ul>
+                                <li><span class="highlight">ตั้งข้อสงสัย:</span> ระวังคำขอที่ดูดีเกินจริง</li>
+                                <li><span class="highlight">ตรวจสอบความผิดปกติ:</span> การกะพริบตา, สีผิว, การขยับปาก</li>
+                                <li><span class="highlight">ยืนยันตัวตน:</span> โทรศัพท์หรือวิดีโอคอลกลับ</li>
+                                <li><span class="highlight">ติดตามข่าวสาร:</span> รู้เท่าทันเทคนิคหลอกลวงใหม่ๆ</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 26, 28)</div>
+                        </div>
+                    </div>
+                </div>
 
-<strong>7. Actions on Objectives (การดำเนินการตามเป้าหมาย):</strong> ผู้โจมตีลงมือดำเนินการตามเป้าหมายที่วางไว้ เช่น การขโมยข้อมูล (Data Exfiltration), การทำลายข้อมูล, หรือการเข้ารหัสข้อมูลเพื่อเรียกค่าไถ่ (Ransomware)</div>
-                    <div class="reference">📖 อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 37-45)</div>
+                <!-- Question 9 -->
+                <div class="question-card" data-chapter="ch3">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 9 - Chapter 3</span>
+                            <div class="question-text">Spyware และ Adware แตกต่างกันอย่างไร?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>Spyware-Applications:</strong></p>
+                            <ul>
+                                <li>ออกแบบมาเพื่อ "สอดแนม" ติดตามกิจกรรมผู้ใช้</li>
+                                <li>ทำงานโดยไม่ได้รับความยินยอมชัดแจ้ง</li>
+                                <li>ขโมยข้อมูลส่วนบุคคล, รหัสผ่าน, ข้อมูลการเงิน</li>
+                                <li>ติดตั้งแฝงมากับโปรแกรมอื่น</li>
+                            </ul>
+                            
+                            <p><strong>Adware-Applications:</strong></p>
+                            <ul>
+                                <li>แสดงโฆษณาที่ไม่พึงประสงค์</li>
+                                <li>ผู้ใช้อาจ "ยินยอม" โดยไม่รู้ตัว (มากับซอฟต์แวร์ฟรี)</li>
+                                <li>ติดตามพฤติกรรมเพื่อแสดงโฆษณาตรงเป้า</li>
+                                <li>สร้างความรำคาญ, ลดประสิทธิภาพเครื่อง</li>
+                            </ul>
+                            
+                            <p><span class="highlight">ความแตกต่างสำคัญ:</span> "ความยินยอม" - Spyware ทำงานโดยไม่รู้/ไม่ยินยอม, Adware อาจถือว่าได้รับความยินยอม</p>
+                            <div class="reference">📌 อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 34)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question-card" data-chapter="ch4">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 10 - Chapter 4</span>
+                            <div class="question-text">อธิบายวงจรการตอบสนองเหตุการณ์ (Cyber Incident Response Cycle)</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>4 ขั้นตอนหลักตาม NIST SP 800-61:</strong></p>
+                            
+                            <p><strong>1. Preparation (การเตรียมความพร้อม):</strong></p>
+                            <ul>
+                                <li>วางแผนก่อนเกิดเหตุการณ์</li>
+                                <li>จัดตั้งทีม, นโยบาย, เครื่องมือ</li>
+                            </ul>
+                            
+                            <p><strong>2. Detection & Analysis (การตรวจจับและวิเคราะห์):</strong></p>
+                            <ul>
+                                <li>เฝ้าระวังและตรวจจับสัญญาณ</li>
+                                <li>วิเคราะห์ยืนยัน, ประเมินผลกระทบ</li>
+                            </ul>
+                            
+                            <p><strong>3. Containment, Eradication & Recovery:</strong></p>
+                            <ul>
+                                <li><em>Containment:</em> จำกัดความเสียหาย</li>
+                                <li><em>Eradication:</em> กำจัดต้นตอปัญหา</li>
+                                <li><em>Recovery:</em> กู้คืนระบบ</li>
+                            </ul>
+                            
+                            <p><strong>4. Post-incident Activity (กิจกรรมหลังเกิดเหตุ):</strong></p>
+                            <ul>
+                                <li>จัดทำรายงานสรุป</li>
+                                <li>Lessons Learned</li>
+                                <li>พัฒนากระบวนการ</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch4_Incident Management and Cyber Resilience Framework _ Log.pdf (หน้า 13-14)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question-card" data-chapter="ch4">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 11 - Chapter 4</span>
+                            <div class="question-text">องค์ประกอบการจัดการบันทึกเหตุการณ์ (Log Management) มีอะไรบ้าง?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>4 องค์ประกอบหลักของ Log Management:</strong></p>
+                            
+                            <p><strong>1. Log Generation (การสร้าง Log):</strong></p>
+                            <ul>
+                                <li>กำหนดระบบ/อุปกรณ์ที่ต้องบันทึก</li>
+                                <li>ระบุข้อมูลที่ต้องบันทึก</li>
+                            </ul>
+                            
+                            <p><strong>2. Log Transmission (การส่ง Log):</strong></p>
+                            <ul>
+                                <li>กำหนดวิธีการส่งข้อมูล</li>
+                                <li>รวบรวมไว้ที่ Centralized Log Server</li>
+                                <li>ป้องกันการสูญหาย/แก้ไขระหว่างทาง</li>
+                            </ul>
+                            
+                            <p><strong>3. Log Storage and Disposal (การจัดเก็บและทำลาย):</strong></p>
+                            <ul>
+                                <li>กำหนดระยะเวลาเก็บรักษา</li>
+                                <li>รักษา Confidentiality และ Integrity</li>
+                                <li>กระบวนการทำลายเมื่อครบกำหนด</li>
+                            </ul>
+                            
+                            <p><strong>4. Log Analysis (การวิเคราะห์ Log):</strong></p>
+                            <ul>
+                                <li>กำหนดความถี่การตรวจสอบ</li>
+                                <li>ตรวจหาสิ่งผิดปกติ</li>
+                                <li>กำหนดสิทธิ์การเข้าถึง</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch4_Incident Management and Cyber Resilience Framework _ Log.pdf (หน้า 46)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question-card" data-chapter="ch5">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 12 - Chapter 5</span>
+                            <div class="question-text">3 ฟังก์ชันหลักของ IPS พร้อมตัวอย่างการทำงาน</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>1. Stops the attack itself (หยุดการโจมตีโดยตรง):</strong></p>
+                            <ul>
+                                <li>ยับยั้งการโจมตีทันที</li>
+                                <li><em>ตัวอย่าง:</em> ตรวจพบมัลแวร์ → ตัดการเชื่อมต่อเครือข่ายทันที</li>
+                            </ul>
+                            
+                            <p><strong>2. Changes the security environment (เปลี่ยนแปลงสภาพแวดล้อม):</strong></p>
+                            <ul>
+                                <li>ปรับการตั้งค่าอุปกรณ์ความปลอดภัย</li>
+                                <li><em>ตัวอย่าง:</em> ตรวจพบ Port Scanning → สั่ง Firewall บล็อก IP นั้น</li>
+                            </ul>
+                            
+                            <p><strong>3. Changes the attack's content (เปลี่ยนแปลงเนื้อหาการโจมตี):</strong></p>
+                            <ul>
+                                <li>แก้ไข/ลบส่วนที่เป็นอันตราย</li>
+                                <li><em>ตัวอย่าง:</em> อีเมลติดไวรัส → ลบไฟล์แนบ, ส่งต่อเฉพาะเนื้อหาปลอดภัย</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 6-8)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question-card" data-chapter="ch5">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 13 - Chapter 5</span>
+                            <div class="question-text">วิธีการตรวจจับ Detection Methodologies ทั้ง 3 ลักษณะ</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>1. Signature-based Detection (ตามลายเซ็น):</strong></p>
+                            <ul>
+                                <li>เปรียบเทียบกับฐานข้อมูล Signatures</li>
+                                <li>✅ ประสิทธิภาพสูงกับภัยคุกคามที่รู้จัก</li>
+                                <li>❌ ไม่สามารถตรวจจับการโจมตีใหม่</li>
+                            </ul>
+                            
+                            <p><strong>2. Anomaly-based Detection (ความผิดปกติ):</strong></p>
+                            <ul>
+                                <li>สร้างโปรไฟล์พฤติกรรม "ปกติ"</li>
+                                <li>✅ ตรวจจับ Zero-day attacks ได้</li>
+                                <li>❌ อาจเกิด False Positives สูง</li>
+                            </ul>
+                            
+                            <p><strong>3. Stateful Protocol Analysis (วิเคราะห์สถานะโปรโตคอล):</strong></p>
+                            <ul>
+                                <li>ตรวจสอบตามมาตรฐานโปรโตคอล</li>
+                                <li>✅ แม่นยำกับการโจมตีที่ใช้ช่องโหว่โปรโตคอล</li>
+                                <li>❌ ตรวจไม่พบการโจมตีที่ไม่ละเมิดกฎ</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 11-20)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question-card" data-chapter="ch5">
+                    <div class="question-header" onclick="toggleAnswer(this)">
+                        <div>
+                            <span class="question-number">ข้อ 14 - Chapter 5</span>
+                            <div class="question-text">องค์ประกอบของ IDPS มีอะไรบ้าง?</div>
+                        </div>
+                        <button class="bookmark-btn" onclick="toggleBookmark(event, this)">☆</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-content">
+                            <p><strong>4 องค์ประกอบหลักของ IDPS:</strong></p>
+                            
+                            <p><strong>1. Sensor or Agent:</strong></p>
+                            <ul>
+                                <li><em>Sensor:</em> ใช้กับ Network-based IDPS - ดักจับแพ็กเก็ต</li>
+                                <li><em>Agent:</em> ติดตั้งบน Host-based IDPS - ตรวจสอบกิจกรรมในเครื่อง</li>
+                            </ul>
+                            
+                            <p><strong>2. Management Server:</strong></p>
+                            <ul>
+                                <li>ศูนย์กลางรับข้อมูลจาก Sensor/Agent</li>
+                                <li>ทำ Correlation เชื่อมโยงเหตุการณ์</li>
+                                <li>ระบุการโจมตีที่ซับซ้อน</li>
+                            </ul>
+                            
+                            <p><strong>3. Database Server:</strong></p>
+                            <ul>
+                                <li>จัดเก็บ Event Information</li>
+                                <li>ใช้วิเคราะห์ย้อนหลัง</li>
+                                <li>ทำ Forensic</li>
+                            </ul>
+                            
+                            <p><strong>4. Console:</strong></p>
+                            <ul>
+                                <li>User Interface สำหรับผู้ดูแลระบบ</li>
+                                <li>ดูการแจ้งเตือน, วิเคราะห์เหตุการณ์</li>
+                                <li>ตั้งค่าระบบ, สร้างรายงาน</li>
+                            </ul>
+                            <div class="reference">📌 อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 21-24)</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Chapter 3 -->
-        <div class="chapter" id="chapter3">
-            <div class="chapter-header">
-                <h2>Chapter 3: Cybersecurity Threat and Risks and Awareness</h2>
-                <p>เนื้อหาครอบคลุม Information Security, Cybersecurity และภัยคุกคามต่างๆ</p>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 7</span>
-                </div>
-                <div class="question-text">อธิบายความแตกต่างระหว่าง Information Security และ Cybersecurity</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content"><strong>Information Security (ความมั่นคงปลอดภัยสารสนเทศ):</strong> มุ่งเน้นการปกป้อง "สารสนเทศ" หรือ "ข้อมูล" ในทุกรูปแบบ ไม่ว่าจะเป็นข้อมูลดิจิทัล (Digital) หรือข้อมูลกายภาพ (Analog) เช่น เอกสารกระดาษ โดยให้ความสำคัญกับหลักการ 3 ประการคือ การรักษาความลับ (Confidentiality), ความถูกต้องครบถ้วน (Integrity), และความพร้อมใช้งาน (Availability) หรือที่เรียกว่า CIA Triad
-
-<strong>Cybersecurity (ความมั่นคงปลอดภัยไซเบอร์):</strong> เป็นส่วนหนึ่งของ Information Security แต่มุ่งเน้นการปกป้อง "สินทรัพย์ในโลกไซเบอร์" (Cyberspace) จากการถูกโจมตีทางดิจิทัล ซึ่งรวมถึงการปกป้องระบบคอมพิวเตอร์, เครือข่าย, โปรแกรม และข้อมูลที่จัดเก็บและส่งผ่านเทคโนโลยีสารสนเทศและการสื่อสาร (ICT)
-
-<strong>สรุป:</strong> Information Security มีขอบเขตที่กว้างกว่า ครอบคลุมข้อมูลทุกรูปแบบ ในขณะที่ Cybersecurity จะเน้นไปที่การป้องกันภัยคุกคามในโลกดิจิทัลโดยเฉพาะ</div>
-                    <div class="reference">📖 อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 4-8)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 8</span>
-                </div>
-                <div class="question-text">อธิบาย Deepfake Attack คืออะไร พร้อมยกตัวอย่างการโจมตีลักษณะนี้มา 1 ตัวอย่างและแนวทางการป้องกัน</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content"><strong>Deepfake Attack คือ:</strong> การใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) โดยเฉพาะเทคนิค Deep Learning ในการสร้างสื่อสังเคราะห์ (Synthetic Media) ไม่ว่าจะเป็นวิดีโอ, รูปภาพ หรือเสียง ที่ปลอมแปลงใบหน้าหรือเสียงของบุคคลอื่นให้ดูสมจริงอย่างยิ่ง เพื่อใช้ในการหลอกลวง, สร้างความเสื่อมเสีย, เผยแพร่ข่าวปลอม หรือโจมตีทางไซเบอร์
-
-<strong>ตัวอย่างการโจมตี:</strong>
-มีการใช้เทคโนโลยี Deepfake ปลอมแปลงวิดีโอและเสียงของบุคคลที่มีชื่อเสียง เช่น อีลอน มัสก์ (Elon Musk) โดยสร้างวิดีโอไลฟ์สดปลอมที่ดูเหมือนว่าอีลอน มัสก์ กำลังโปรโมตการลงทุนในสกุลเงินดิจิทัล และชักชวนให้ผู้ชมสแกน QR Code เพื่อโอนเงินเข้าร่วมลงทุน ซึ่งแท้จริงแล้วเป็นการหลอกลวงเพื่อขโมยเงินจากเหยื่อ
-
-<strong>แนวทางการป้องกัน:</strong>
-• <strong>ตั้งข้อสงสัย (Be Skeptical):</strong> หากพบบุคคลสาธารณะหรือคนรู้จักขอข้อมูลส่วนตัว, ขอให้โอนเงิน หรือเสนอสิ่งที่ดูดีเกินจริงผ่านช่องทางออนไลน์ ให้ตั้งข้อสงสัยไว้ก่อนเสมอ
-
-• <strong>ตรวจสอบความผิดปกติ:</strong> สังเกตความไม่สมจริงของวิดีโอ เช่น การกะพริบตาที่ไม่เป็นธรรมชาติ, สีผิวที่ไม่สม่ำเสมอ, การขยับปากที่ไม่ตรงกับเสียง, หรือเสียงที่เหมือนหุ่นยนต์
-
-• <strong>ยืนยันตัวตนผ่านช่องทางอื่น (Verify Identity):</strong> หากเป็นคนรู้จักที่ติดต่อมาเพื่อขอความช่วยเหลือทางการเงิน ควรโทรศัพท์หรือวิดีโอคอลกลับไปเพื่อยืนยันว่าเป็นบุคคลนั้นจริง ไม่ควรเชื่อจากการสนทนาผ่านข้อความหรือเสียงที่ถูกส่งมาเพียงอย่างเดียว
-
-• <strong>ติดตามข่าวสาร:</strong> รับรู้ข่าวสารเกี่ยวกับเทคนิคการหลอกลวงใหม่ๆ อยู่เสมอ เพื่อให้รู้เท่าทันกลโกงของมิจฉาชีพ</div>
-                    <div class="reference">📖 อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 26, 28)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 9</span>
-                </div>
-                <div class="question-text">Spyware-Applications และ Adware-Applications แตกต่างกันอย่างไร</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content"><strong>Spyware-Applications (สปายแวร์):</strong> เป็นแอปพลิเคชันที่ถูกออกแบบมาเพื่อ "สอดแนม" หรือติดตามกิจกรรมของผู้ใช้ โดยไม่ได้รับความยินยอมอย่างชัดแจ้งจากผู้ใช้ มักจะถูกติดตั้งแฝงมากับโปรแกรมอื่น มีวัตถุประสงค์เพื่อขโมยข้อมูลส่วนบุคคล, รหัสผ่าน, หรือข้อมูลทางการเงิน
-
-<strong>Adware-Applications (แอดแวร์):</strong> เป็นแอปพลิเคชันที่แสดงโฆษณาที่ไม่พึงประสงค์แก่ผู้ใช้ โดยทั่วไปแล้วผู้ใช้อาจจะ "ยินยอม" ให้ติดตั้งโดยไม่รู้ตัว (มักจะพ่วงมากับซอฟต์แวร์ฟรี) โดย Adware จะติดตามพฤติกรรมการใช้งานอินเทอร์เน็ตของผู้ใช้เพื่อนำเสนอโฆษณาที่ตรงเป้าหมาย แม้จะไม่เป็นอันตรายเท่าสปายแวร์ แต่ก็สร้างความรำคาญและอาจทำให้ประสิทธิภาพของเครื่องลดลง
-
-<strong>ความแตกต่างที่สำคัญ:</strong> คือ "ความยินยอม" (Permission) โดย Spyware จะทำงานโดยที่ผู้ใช้ไม่รู้และไม่ยินยอม ในขณะที่ Adware อาจถือว่าผู้ใช้ได้ให้ความยินยอม (แม้จะไม่ตั้งใจ) ในตอนติดตั้งโปรแกรม</div>
-                    <div class="reference">📖 อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 34)</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Chapter 4 -->
-        <div class="chapter" id="chapter4">
-            <div class="chapter-header">
-                <h2>Chapter 4: Incident Management and Cyber Resilience Framework & Log Management</h2>
-                <p>เนื้อหาครอบคลุมการจัดการเหตุการณ์และการจัดการบันทึกเหตุการณ์</p>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 10</span>
-                </div>
-                <div class="question-text">อธิบายวงจรการตอบสนองเหตุการณ์ (Cyber Incident Response Cycle) มาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">วงจรการตอบสนองเหตุการณ์ (Cyber Incident Response Cycle) ตามแนวทางของ NIST SP 800-61 ประกอบด้วย 4 ขั้นตอนหลัก ดังนี้
-
-<strong>1. Preparation (การเตรียมความพร้อม):</strong> เป็นขั้นตอนการวางแผนและเตรียมการก่อนเกิดเหตุการณ์จริง รวมถึงการจัดตั้งทีมนโยบาย, เครื่องมือ, และกระบวนการต่างๆ เพื่อให้พร้อมรับมือกับเหตุการณ์ได้อย่างมีประสิทธิภาพ
-
-<strong>2. Detection & Analysis (การตรวจจับและวิเคราะห์):</strong> เป็นขั้นตอนการเฝ้าระวัง, ตรวจจับสัญญาณของเหตุการณ์ไม่พึงประสงค์, วิเคราะห์ข้อมูลเพื่อยืนยันว่าเป็นเหตุการณ์จริง, ประเมินขอบเขตและผลกระทบ, และจัดลำดับความสำคัญของเหตุการณ์
-
-<strong>3. Containment, Eradication & Recovery (การจำกัดขอบเขต, การกำจัด, และการกู้คืน):</strong>
-• Containment: จำกัดความเสียหายไม่ให้แพร่กระจายไปยังส่วนอื่นๆ ของระบบ
-• Eradication: กำจัดต้นตอของปัญหา เช่น มัลแวร์, ช่องโหว่ ออกจากระบบ
-• Recovery: กู้คืนระบบที่ได้รับผลกระทบให้กลับมาทำงานได้ตามปกติและปลอดภัย
-
-<strong>4. Post-incident Activity (กิจกรรมหลังเกิดเหตุ):</strong> เป็นขั้นตอนการเรียนรู้จากเหตุการณ์ที่เกิดขึ้น จัดทำรายงานสรุป, วิเคราะห์สิ่งที่ทำได้ดีและสิ่งที่ควรปรับปรุง (Lessons Learned) และนำข้อมูลไปพัฒนากระบวนการเตรียมความพร้อมให้ดียิ่งขึ้นในอนาคต</div>
-                    <div class="reference">📖 อ้างอิง: Ch4_Incident Management and Cyber Resilience Framework _ Log.pdf (หน้า 13-14)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 11</span>
-                </div>
-                <div class="question-text">อธิบายองค์ประกอบการจัดการบันทึกเหตุการณ์ (Log Management) ทั้ง 4 มาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">องค์ประกอบของการจัดการบันทึกเหตุการณ์ (Log Management) มี 4 ส่วนหลัก ดังนี้
-
-<strong>1. Log Generation (การสร้าง Log):</strong> กำหนดว่าระบบหรืออุปกรณ์ใดบ้าง (เช่น เซิร์ฟเวอร์, ไฟร์วอลล์, แอปพลิเคชัน) ที่จำเป็นต้องเปิดใช้งานการบันทึกเหตุการณ์ และต้องบันทึกข้อมูลอะไรบ้าง
-
-<strong>2. Log Transmission (การส่ง Log):</strong> กำหนดวิธีการและช่องทางในการส่งข้อมูล Log จากแหล่งต่างๆ มารวบรวมไว้ที่ส่วนกลาง (Centralized Log Server) อย่างปลอดภัย เพื่อป้องกันการสูญหายหรือการเปลี่ยนแปลงแก้ไขข้อมูลระหว่างทาง
-
-<strong>3. Log Storage and Disposal (การจัดเก็บและทำลาย Log):</strong> กำหนดนโยบายในการจัดเก็บ Log เช่น ระยะเวลาที่ต้องเก็บรักษา, วิธีการจัดเก็บเพื่อรักษาความลับ (Confidentiality) และความถูกต้อง (Integrity) ของข้อมูล และกระบวนการทำลาย Log เมื่อครบกำหนดอายุการจัดเก็บ
-
-<strong>4. Log Analysis (การวิเคราะห์ Log):</strong> กำหนดความถี่และวิธีการในการตรวจสอบและวิเคราะห์ข้อมูล Log เพื่อตรวจหาสิ่งผิดปกติ, เหตุการณ์ด้านความปลอดภัย, หรือการละเมิดนโยบาย รวมถึงกำหนดสิทธิ์ในการเข้าถึงข้อมูล Log ของผู้ที่เกี่ยวข้อง</div>
-                    <div class="reference">📖 อ้างอิง: Ch4_Incident Management and Cyber Resilience Framework _ Log.pdf (หน้า 46)</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Chapter 5 -->
-        <div class="chapter" id="chapter5">
-            <div class="chapter-header">
-                <h2>Chapter 5: Intrusion Detection and Prevention Systems</h2>
-                <p>เนื้อหาครอบคลุม IDS/IPS และวิธีการตรวจจับการบุกรุก</p>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 12</span>
-                </div>
-                <div class="question-text">อธิบาย 3 ฟังก์ชั่นหลักของ Intrusion Prevention Systems (IPS) พร้อมยกตัวอย่างการทำงานของทั้ง 3 ฟังก์ชั่น</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">3 ฟังก์ชันหลักของ Intrusion Prevention Systems (IPS) คือ
-
-<strong>1. หยุดการโจมตีโดยตรง (Stops the attack itself):</strong> IPS สามารถยับยั้งการโจมตีที่ตรวจพบได้ทันที
-<em>ตัวอย่าง:</em> เมื่อ IPS ตรวจพบการรับส่งข้อมูลที่ตรงกับรูปแบบของมัลแวร์ที่รู้จัก มันจะทำการตัดการเชื่อมต่อเครือข่าย (Terminate the network connection) ของผู้โจมตีทันที เพื่อไม่ให้มัลแวร์สามารถแพร่กระจายหรือส่งข้อมูลออกไปได้
-
-<strong>2. เปลี่ยนแปลงสภาพแวดล้อมความปลอดภัย (Changes the security environment):</strong> IPS สามารถปรับเปลี่ยนการตั้งค่าของอุปกรณ์ความปลอดภัยอื่นๆ เพื่อรับมือกับการโจมตี
-<em>ตัวอย่าง:</em> เมื่อ IPS ตรวจพบความพยายามสแกนพอร์ตจาก IP Address หนึ่งซ้ำๆ กัน มันสามารถส่งคำสั่งไปให้ Firewall เพื่อสร้างกฎ (Rule) ใหม่ในการบล็อกการเชื่อมต่อทั้งหมดจาก IP Address นั้นชั่วคราว
-
-<strong>3. เปลี่ยนแปลงเนื้อหาของการโจมตี (Changes the attack's content):</strong> IPS สามารถแก้ไขหรือลบส่วนที่เป็นอันตรายออกจากการรับส่งข้อมูล ทำให้ข้อมูลที่เหลือไม่เป็นอันตรายอีกต่อไป
-<em>ตัวอย่าง:</em> เมื่อมีอีเมลเข้ามาพร้อมไฟล์แนบที่ติดไวรัส IPS สามารถลบไฟล์แนบที่เป็นอันตรายนั้นออกไป แล้วจึงส่งต่อเฉพาะเนื้อหาอีเมลที่ปลอดภัยไปยังผู้รับ</div>
-                    <div class="reference">📖 อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 6-8)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 13</span>
-                </div>
-                <div class="question-text">อธิบายวิธีการตรวจจับ (Detection Methodologies) ทั้ง 3 ลักษณะ มาพอสังเขป อันได้แก่ Signature-based Detection, Anomaly-based Detection และ Stateful Protocol Analysis Detection</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">วิธีการตรวจจับ 3 ลักษณะ ได้แก่
-
-<strong>1. Signature-based Detection (การตรวจจับตามลายเซ็น):</strong> เป็นการตรวจจับโดยเปรียบเทียบข้อมูลที่ตรวจสอบ (เช่น แพ็กเก็ตเครือข่าย, ไฟล์) กับฐานข้อมูลของ "ลายเซ็น" (Signatures) หรือรูปแบบ (Patterns) ของการโจมตีที่รู้จักอยู่แล้ว หากข้อมูลตรงกับลายเซ็นใดๆ ในฐานข้อมูล ระบบจะแจ้งเตือนว่าเป็นการโจมตี วิธีนี้มีประสิทธิภาพสูงในการตรวจจับภัยคุกคามที่รู้จักแล้ว แต่ไม่สามารถตรวจจับการโจมตีรูปแบบใหม่ๆ ที่ยังไม่มีลายเซ็นได้
-
-<strong>2. Anomaly-based Detection (การตรวจจับความผิดปกติ):</strong> เป็นการตรวจจับโดยสร้าง "โปรไฟล์" หรือแบบจำลองของพฤติกรรมที่ "ปกติ" ของระบบหรือเครือข่ายขึ้นมาก่อน จากนั้นระบบจะเฝ้าสังเกตพฤติกรรมปัจจุบัน หากมีพฤติกรรมใดที่เบี่ยงเบนไปจากโปรไฟล์ปกติอย่างมีนัยสำคัญ ระบบจะถือว่าเป็นความผิดปกติ (Anomaly) และแจ้งเตือน วิธีนี้สามารถตรวจจับการโจมตีรูปแบบใหม่ๆ (Zero-day attacks) ได้ แต่ก็อาจเกิด False Positives (การแจ้งเตือนที่ผิดพลาด) ได้หากพฤติกรรมปกติมีการเปลี่ยนแปลง
-
-<strong>3. Stateful Protocol Analysis Detection (การตรวจจับโดยวิเคราะห์สถานะของโปรโตคอล):</strong> เป็นการตรวจจับโดยอาศัยความเข้าใจในสถานะ (State) และกฎของโปรโตคอลต่างๆ (เช่น HTTP, FTP) ระบบจะตรวจสอบว่าการสื่อสารเป็นไปตามมาตรฐานของโปรโตคอลนั้นๆ หรือไม่ หากมีการใช้งานคำสั่งหรือลำดับขั้นที่ผิดไปจากที่โปรโตคอลกำหนดไว้ จะถือว่าเป็นสิ่งผิดปกติ วิธีนี้มีความแม่นยำสูงในการตรวจจับการโจมตีที่ใช้ประโยชน์จากช่องโหว่ของโปรโตคอล แต่ไม่สามารถตรวจจับการโจมตีที่ไม่ได้ละเมิดกฎของโปรโตคอลได้</div>
-                    <div class="reference">📖 อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 11-20)</div>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-number">ข้อ 14</span>
-                </div>
-                <div class="question-text">องค์ประกอบของ IDPS ประกอบด้วยอะไร พร้อมอธิบายหน้าที่ของแต่ละองค์ประกอบ มาพอสังเขป</div>
-                <button class="toggle-answer" onclick="toggleAnswer(this)">แสดงคำตอบ</button>
-                <div class="answer-section answer-collapsed">
-                    <div class="answer-label">
-                        <span>✅</span>
-                        <span>คำตอบ:</span>
-                    </div>
-                    <div class="answer-content">องค์ประกอบของระบบตรวจจับและป้องกันการบุกรุก (IDPS) โดยทั่วไปประกอบด้วย 4 ส่วนหลัก ดังนี้
-
-<strong>1. Sensor or Agent (เซ็นเซอร์หรือเอเจนต์):</strong> เป็นส่วนที่ทำหน้าที่เฝ้าระวังและรวบรวมข้อมูลเหตุการณ์ต่างๆ ที่เกิดขึ้น
-• Sensor: มักใช้กับระบบที่ตรวจสอบเครือข่าย (Network-based IDPS) โดยจะดักจับและวิเคราะห์แพ็กเก็ตข้อมูลบนเครือข่าย
-• Agent: เป็นซอฟต์แวร์ที่ติดตั้งบนเครื่องคอมพิวเตอร์แต่ละเครื่อง (Host-based IDPS) เพื่อตรวจสอบกิจกรรมภายในเครื่องนั้นๆ เช่น การเข้าถึงไฟล์, การทำงานของโปรเซส
-
-<strong>2. Management Server (เซิร์ฟเวอร์จัดการ):</strong> เป็นศูนย์กลางที่รับข้อมูลเหตุการณ์จาก Sensor หรือ Agent หลายๆ ตัวมาประมวลผลและวิเคราะห์ในภาพรวม สามารถทำ Correlation คือการเชื่อมโยงเหตุการณ์จากหลายแหล่งที่มาเพื่อระบุการโจมตีที่ซับซ้อนซึ่ง Sensor แต่ละตัวอาจมองไม่เห็น
-
-<strong>3. Database Server (เซิร์ฟเวอร์ฐานข้อมูล):</strong> เป็นที่สำหรับจัดเก็บข้อมูลเหตุการณ์ (Event Information) ที่ถูกบันทึกโดย Sensor, Agent, หรือ Management Server เพื่อใช้ในการวิเคราะห์ย้อนหลังหรือการทำ Forensic
-
-<strong>4. Console (คอนโซล):</strong> เป็นส่วนติดต่อกับผู้ใช้งาน (User Interface) ที่ให้ผู้ดูแลระบบสามารถเข้ามาดูการแจ้งเตือน, วิเคราะห์เหตุการณ์, ตั้งค่าการทำงานของระบบ, และสร้างรายงานต่างๆ ได้</div>
-                    <div class="reference">📖 อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 21-24)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Progress Bar -->
-    <div class="progress-container">
-        <div class="progress-text">ความคืบหน้า: <span id="progressPercent">0%</span></div>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
+        <div class="floating-menu">
+            <button class="floating-btn" onclick="scrollToTop()">⬆️</button>
+            <button class="floating-btn" onclick="printPage()">🖨️</button>
         </div>
     </div>
 
     <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
+        // State management
+        let allAnswersVisible = false;
+        let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+        let viewedQuestions = JSON.parse(localStorage.getItem('viewedQuestions') || '[]');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            restoreBookmarks();
+            updateProgress();
+        });
+
+        // Toggle answer visibility
+        function toggleAnswer(header) {
+            const answer = header.nextElementSibling;
+            const card = header.closest('.question-card');
+            const questionIndex = Array.from(document.querySelectorAll('.question-card')).indexOf(card);
+            
+            answer.classList.toggle('show');
+            
+            // Track viewed questions
+            if (!viewedQuestions.includes(questionIndex)) {
+                viewedQuestions.push(questionIndex);
+                localStorage.setItem('viewedQuestions', JSON.stringify(viewedQuestions));
+                updateProgress();
+            }
+        }
+
+        // Toggle all answers
+        function toggleAllAnswers() {
+            const answers = document.querySelectorAll('.answer');
+            allAnswersVisible = !allAnswersVisible;
+            
+            answers.forEach(answer => {
+                if (allAnswersVisible) {
+                    answer.classList.add('show');
+                } else {
+                    answer.classList.remove('show');
+                }
+            });
+            
+            document.getElementById('toggleAllText').textContent = 
+                allAnswersVisible ? '📕 ซ่อนคำตอบทั้งหมด' : '📖 แสดงคำตอบทั้งหมด';
+        }
+
+        // Bookmark functionality
+        function toggleBookmark(event, btn) {
+            event.stopPropagation();
+            const card = btn.closest('.question-card');
+            const questionIndex = Array.from(document.querySelectorAll('.question-card')).indexOf(card);
+            
+            if (bookmarks.includes(questionIndex)) {
+                bookmarks = bookmarks.filter(b => b !== questionIndex);
+                btn.textContent = '☆';
+                btn.classList.remove('bookmarked');
+            } else {
+                bookmarks.push(questionIndex);
+                btn.textContent = '★';
+                btn.classList.add('bookmarked');
+            }
+            
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+            updateStats();
+        }
+
+        function restoreBookmarks() {
+            const cards = document.querySelectorAll('.question-card');
+            bookmarks.forEach(index => {
+                if (cards[index]) {
+                    const btn = cards[index].querySelector('.bookmark-btn');
+                    btn.textContent = '★';
+                    btn.classList.add('bookmarked');
+                }
+            });
+        }
+
+        function showBookmarked() {
+            const cards = document.querySelectorAll('.question-card');
+            cards.forEach((card, index) => {
+                if (bookmarks.includes(index)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+        }
+
+        // Chapter navigation
+        function showChapter(chapter) {
+            const cards = document.querySelectorAll('.question-card');
+            const tabs = document.querySelectorAll('.nav-tab');
+            
+            // Update tab active state
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide cards based on chapter
+            cards.forEach(card => {
+                if (chapter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.dataset.chapter === chapter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.question-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    
+                    // Highlight search term
+                    if (searchTerm) {
+                        highlightText(card, searchTerm);
+                    } else {
+                        removeHighlight(card);
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        function highlightText(element, searchTerm) {
+            // Implementation for highlighting search terms
+            // This is simplified - in production, use a proper text highlighting library
+        }
+
+        function removeHighlight(element) {
+            // Remove highlighting
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            localStorage.setItem('theme', newTheme);
+        }
 
         // Load saved theme
         const savedTheme = localStorage.getItem('theme') || 'light';
         if (savedTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('themeIcon').textContent = '☀️';
         }
 
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Chapter Navigation
-        const navTabs = document.querySelectorAll('.nav-tab');
-        const chapters = document.querySelectorAll('.chapter');
-
-        navTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetChapter = tab.getAttribute('data-chapter');
-                
-                // Update active tab
-                navTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Show target chapter
-                chapters.forEach(chapter => {
-                    chapter.classList.remove('active');
-                    if (chapter.id === targetChapter) {
-                        chapter.classList.add('active');
-                    }
-                });
-
-                // Update progress
-                updateProgress();
-            });
-        });
-
-        // Toggle Answer Function
-        function toggleAnswer(button) {
-            const answerSection = button.nextElementSibling;
-            if (answerSection.classList.contains('answer-collapsed')) {
-                answerSection.classList.remove('answer-collapsed');
-                button.textContent = 'ซ่อนคำตอบ';
-            } else {
-                answerSection.classList.add('answer-collapsed');
-                button.textContent = 'แสดงคำตอบ';
-            }
-            updateProgress();
+        // Update statistics
+        function updateStats() {
+            document.getElementById('bookmarkCount').textContent = bookmarks.length;
         }
 
-        // Search Functionality
-        const searchInput = document.getElementById('searchInput');
-        
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            
-            if (searchTerm.length < 2) {
-                clearHighlights();
-                return;
-            }
-            
-            clearHighlights();
-            highlightSearchResults(searchTerm);
-        });
-
-        function clearHighlights() {
-            const highlights = document.querySelectorAll('.highlight');
-            highlights.forEach(highlight => {
-                const parent = highlight.parentNode;
-                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
-                parent.normalize();
-            });
-        }
-
-        function highlightSearchResults(searchTerm) {
-            const contentElements = document.querySelectorAll('.question-text, .answer-content');
-            
-            contentElements.forEach(element => {
-                const text = element.textContent;
-                const regex = new RegExp(`(${searchTerm})`, 'gi');
-                
-                if (regex.test(text)) {
-                    const newHTML = text.replace(regex, '<span class="highlight">$1</span>');
-                    element.innerHTML = newHTML;
-                }
-            });
-        }
-
-        // Progress Tracking
+        // Progress tracking
         function updateProgress() {
             const totalQuestions = document.querySelectorAll('.question-card').length;
-            const viewedAnswers = document.querySelectorAll('.answer-section:not(.answer-collapsed)').length;
-            const progressPercent = Math.round((viewedAnswers / totalQuestions) * 100);
+            const viewedCount = viewedQuestions.length;
+            const percentage = Math.round((viewedCount / totalQuestions) * 100);
             
-            document.getElementById('progressPercent').textContent = `${progressPercent}%`;
-            document.getElementById('progressFill').style.width = `${progressPercent}%`;
-            
-            // Save progress to localStorage
-            localStorage.setItem('progressPercent', progressPercent);
+            document.getElementById('progressPercent').textContent = percentage + '%';
+            document.getElementById('progressBar').style.width = percentage + '%';
         }
 
-        // Load saved progress
-        window.addEventListener('load', () => {
-            const savedProgress = localStorage.getItem('progressPercent');
-            if (savedProgress) {
-                document.getElementById('progressPercent').textContent = `${savedProgress}%`;
-                document.getElementById('progressFill').style.width = `${savedProgress}%`;
-            }
-        });
+        // Utility functions
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Ctrl/Cmd + K for search
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        function printPage() {
+            window.print();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + F for search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
                 e.preventDefault();
-                searchInput.focus();
+                document.getElementById('searchInput').focus();
             }
             
-            // Escape to clear search
-            if (e.key === 'Escape') {
-                searchInput.value = '';
-                clearHighlights();
-                searchInput.blur();
+            // Ctrl/Cmd + B for bookmarks
+            if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+                e.preventDefault();
+                showBookmarked();
+            }
+            
+            // Ctrl/Cmd + D for dark mode
+            if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
+                e.preventDefault();
+                toggleTheme();
             }
         });
 
-        // Print Styles
+        // Print styles
         const printStyles = `
             @media print {
-                .header-controls,
-                .progress-container,
-                .toggle-answer {
+                .controls, .nav-tabs, .floating-menu, .stats {
                     display: none !important;
                 }
-                
-                .answer-collapsed {
+                .answer {
                     display: block !important;
                 }
-                
-                .chapter {
-                    display: block !important;
-                    page-break-after: always;
-                }
-                
-                body {
-                    color: black !important;
-                    background: white !important;
-                }
-                
                 .question-card {
                     page-break-inside: avoid;
-                    border: 1px solid #000;
-                    margin-bottom: 20px;
                 }
             }
         `;
-
-        const styleSheet = document.createElement('style');
+        const styleSheet = document.createElement("style");
         styleSheet.textContent = printStyles;
         document.head.appendChild(styleSheet);
     </script>
