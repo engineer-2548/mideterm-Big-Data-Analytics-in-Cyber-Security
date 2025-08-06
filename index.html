@@ -30,7 +30,7 @@
             transition: max-height 0.5s ease-in-out;
         }
         .card.open .answer-container {
-            max-height: 1000px; /* Adjust as needed */
+            max-height: 1200px; /* Increased max-height for longer answers */
         }
         .question-btn {
             cursor: pointer;
@@ -125,20 +125,18 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Add other questions similarly -->
             
             <div class="card rounded-xl overflow-hidden">
                 <div class="p-6 md:p-8">
                     <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white mb-4">3. คุณลักษณะสำคัญของ Big Data ทั้ง 5V ประกอบด้วยอะไร พร้อมอธิบายมาพอสังเขป</h3>
+                        <h3 class="text-xl font-bold text-white">3. คุณลักษณะสำคัญของ Big Data ทั้ง 5V ประกอบด้วยอะไร พร้อมอธิบายมาพอสังเขป</h3>
                         <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                     <div class="answer-container">
                         <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
                             <p>Big Data หรือข้อมูลขนาดใหญ่ มีคุณลักษณะสำคัญ 5 ประการ ที่ทำให้การจัดการและการวิเคราะห์มีความท้าทายและแตกต่างจากข้อมูลทั่วไป หรือที่เรียกว่า "5V's" ดังนี้ครับ</p>
                              <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Volume (ปริมาณ):</strong> คือ ขนาดของข้อมูลที่มีจำนวนมหาศาล ตั้งแต่ระดับเทราไบต์ (Terabytes) ไปจนถึงเซตตาไบต์ (Zettabytes) ซึ่งระบบคอมพิวเตอร์แบบดั้งเดิมไม่สามารถจัดเก็บหรือประวลผลได้อย่างมีประสิทธิภาพ</li>
+                                <li><strong>Volume (ปริมาณ):</strong> คือ ขนาดของข้อมูลที่มีจำนวนมหาศาล ตั้งแต่ระดับเทราไบต์ (Terabytes) ไปจนถึงเซตตาไบต์ (Zettabytes) ซึ่งระบบคอมพิวเตอร์แบบดั้งเดิมไม่สามารถจัดเก็บหรือประมวลผลได้อย่างมีประสิทธิภาพ</li>
                                 <li><strong>Velocity (ความเร็ว):</strong> คือ อัตราเร็วในการสร้างและไหลเข้าของข้อมูล ซึ่งเกิดขึ้นอย่างรวดเร็วและต่อเนื่องแบบเรียลไม์ เช่น ข้อมูลจากโซเชียลมีเดีย หรือข้อมูลจากเซ็นเซอร์ IoT ทำให้ต้องมีเทคโนโลยีที่สามารถประมวลผลข้อมูลได้อย่างทันท่วงที</li>
                                 <li><strong>Variety (ความหลากหลาย):</strong> คือ รูปแบบของข้อมูลที่มีความหลากหลายสูงมาก ไม่ได้มีแค่ข้อมูลที่มีโครงสร้างชัดเจน (Structured Data) แบบตาราง แต่ยังรวมถึงข้อมูลกึ่งมีโครงสร้าง (Semi-structured) เช่น ไฟล์ XML และข้อมูลที่ไม่มีโครงสร้าง (Unstructured Data) เช่น ข้อความ, รูปภาพ, วิดีโอ, และไฟล์เสียง</li>
                                 <li><strong>Veracity (ความถูกต้องน่าเชื่อถือ):</strong> คือ คุณภาพและความน่าเชื่อถือของข้อมูล เนื่องจากข้อมูลขนาดใหญ่มักมาจากหลายแหล่ง จึงอาจมีความไม่แน่นอน, ความไม่สมบูรณ์, หรือความขัดแย้งกันเองอยู่ ซึ่งเป็นความท้าทายในการคัดกรองและยืนยันความถูกต้องก่อนนำไปใช้งาน</li>
@@ -374,4 +372,89 @@
                                         <li><strong>จุดด้อย:</strong> ไม่สามารถตรวจจับการโจมตีรูปแบบใหม่ๆ หรือ Zero-day Attack ที่ยังไม่มีประวัติในแฟ้มได้เลย</li>
                                     </ul>
                                 </li>
-                                <li><strong>Anomaly-based Detection (การตรวจจับความผิดปกติ):</strong> วิธีนี้เปรียบเสมือนการ "เรียนรู้พฤติกรรมปกติ" ระบบจะใช้เวลาเรียนรู้และสร้างโปรไฟล์ว่าการใช้งานเครือข่ายในภาวะปกติเป็นอย่างไร (Baseline) จากนั้นจะคอยส่องอยู่ตลอดเวลา หากมีกิจกรรมใด
+                                <li><strong>Anomaly-based Detection (การตรวจจับความผิดปกติ):</strong> วิธีนี้เปรียบเสมือนการ "เรียนรู้พฤติกรรมปกติ" ระบบจะใช้เวลาเรียนรู้และสร้างโปรไฟล์ว่าการใช้งานเครือข่ายในภาวะปกติเป็นอย่างไร (Baseline) จากนั้นจะคอยส่องอยู่ตลอดเวลา หากมีกิจกรรมใดที่ "ผิดปกติ" หรือเบี่ยงเบนไปจาก Baseline ที่เรียนรู้ไว้มากเกินไป ระบบก็จะแจ้งเตือนว่าอาจมีสิ่งผิดปกติเกิดขึ้น
+                                     <ul class="list-disc list-inside ml-4">
+                                        <li><strong>จุดเด่น:</strong> สามารถตรวจจับการโจมตีรูปแบบใหม่ๆ ที่ไม่เคยรู้จักมาก่อนได้</li>
+                                        <li><strong>จุดด้อย:</strong> มีโอกาสเกิดการแจ้งเตือนที่ผิดพลาด (False Positive) ได้สูง หากมีกิจกรรมใหม่ๆ ที่ไม่เคยทำมาก่อนแต่ไม่ใช่การโจมตีเกิดขึ้น</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Stateful Protocol Analysis Detection (การตรวจจับโดยวิเคราะห์สถานะของโปรโตคอล):</strong> วิธีนี้เปรียบเสมือนการมี "ผู้เชี่ยวชาญที่เข้าใจกฎกติกา" ของการสื่อสารในแต่ละโปรโตคอล (เช่น HTTP, FTP) เป็นอย่างดี ระบบจะคอยตรวจสอบว่าการสื่อสารนั้นเป็นไปตาม "กฎ" ที่ถูกต้องของโปรโตคอลหรือไม่ หากมีการกระทำที่ผิดกฎ เช่น การส่งคำสั่งในลำดับที่ผิดเพี้ยนไป ระบบก็จะถือว่าเป็นการโจมตี
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li><strong>จุดเด่น:</strong> มีความแม่นยำในการตรวจจับการโจมตีที่พยายามใช้ช่องโหว่ของโปรโตคอล</li>
+                                        <li><strong>จุดด้อย:</strong> ไม่สามารถตรวจจับการโจมตีที่ไม่ได้ละเมิดกฎของโปรโตคอลได้ และต้องใช้ทรัพยากรในการประมวลผลสูง</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                            <p class="reference mt-4">อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 11-20)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card rounded-xl overflow-hidden">
+                <div class="p-6 md:p-8">
+                    <button class="question-btn text-left">
+                        <h3 class="text-xl font-bold text-white">14. องค์ประกอบของ IDPS ประกอบด้วยอะไร พร้อมอธิบายหน้าที่ของแต่ละองค์ประกอบ มาพอสังเขป</h3>
+                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <div class="answer-container">
+                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
+                            <p>ระบบตรวจจับและป้องกันการบุกรุก (IDPS) ที่สมบูรณ์นั้น ไม่ได้ทำงานด้วยตัวคนเดียว แต่ประกอบด้วยส่วนต่างๆ ที่ทำงานประสานกันเหมือนทีมรักษาความปลอดภัย ซึ่งมี 4 องค์ประกอบหลักดังนี้ครับ</p>
+                            <ol class="list-decimal list-inside space-y-2">
+                                <li><strong>Sensor or Agent (เซ็นเซอร์ หรือ เอเจนต์):</strong> เปรียบเสมือน "ยาม" หรือ "กล้องวงจรปิด" ที่คอยสอดส่องและรวบรวมข้อมูลในจุดต่างๆ
+                                    <ul class="list-disc list-inside ml-4">
+                                        <li><strong>Sensor:</strong> จะถูกวางไว้ในเครือข่ายเพื่อดักจับและตรวจสอบข้อมูล (Packet) ที่วิ่งผ่านไปมา</li>
+                                        <li><strong>Agent:</strong> จะเป็นซอฟต์แวร์ที่ถูกติดตั้งไว้บนเครื่องคอมพิวเตอร์ (Host) เพื่อคอยตรวจสอบกิจกรรมที่เกิดขึ้นภายในเครื่องนั้นๆ</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Management Server (เซิร์ฟเวอร์จัดการ):</strong> เปรียบเสมือน "ห้องควบคุมกลาง" ที่รับข้อมูลทั้งหมดจากยามและกล้องวงจรปิด (Sensors/Agents) ทั่วทั้งองค์กรมาประมวลผลและวิเคราะห์ในภาพรวม ทำให้สามารถมองเห็นการโจมตีที่ซับซ้อนซึ่งอาจเกิดขึ้นจากหลายจุดพร้อมกันได้</li>
+                                <li><strong>Database Server (เซิร์ฟเวอร์ฐานข้อมูล):</strong> เปรียบเสมือน "ห้องเก็บหลักฐาน" ทำหน้าที่จัดเก็บบันทึกเหตุการณ์ (Logs) ทั้งหมดที่ Management Server วิเคราะห์แล้วอย่างเป็นระบบ เพื่อใช้ในการตรวจสอบย้อนหลัง, การสืบสวนเชิงลึก (Forensics) หรือการออกรายงาน</li>
+                                <li><strong>Console (คอนโซล):</strong> เปรียบเสมือน "จอภาพและแผงควบคุม" สำหรับผู้ดูแลระบบ (Admin) เป็นหน้าจอที่ใช้แสดงผลการแจ้งเตือนต่างๆ, ดูรายงาน, และใช้ในการปรับแต่งค่าการทำงานของระบบ IDPS ทั้งหมด</li>
+                            </ol>
+                            <p class="reference mt-4">อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 21-24)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 mt-8 border-t border-gray-800">
+        <p class="text-gray-500">&copy; 2025 - จัดทำเพื่อการทบทวนเนื้อหาก่อนสอบกลางภาค</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const qaContainer = document.getElementById('qa-container');
+            const questionCards = qaContainer.querySelectorAll('.card');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const totalQuestions = questionCards.length;
+
+            questionCards.forEach(card => {
+                const button = card.querySelector('.question-btn');
+                button.addEventListener('click', () => {
+                    card.classList.toggle('open');
+                    
+                    // Mark as read only on the first open
+                    if (!card.hasAttribute('data-read')) {
+                        card.setAttribute('data-read', 'true');
+                        updateProgress();
+                    }
+                });
+            });
+
+            function updateProgress() {
+                const readCount = qaContainer.querySelectorAll('.card[data-read="true"]').length;
+                const percentage = totalQuestions > 0 ? Math.round((readCount / totalQuestions) * 100) : 0;
+                
+                progressBar.style.width = percentage + '%';
+                progressText.textContent = percentage + '%';
+            }
+        });
+    </script>
+
+</body>
+</ht
