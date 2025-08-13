@@ -84,4 +84,344 @@
     <header class="bg-white shadow-md py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 class="text-3xl md:text-4xl font-bold text-teal-700">แบบฝึกหัดทบทวนเนื้อหาก่อนสอบกลางภาค</h1>
-            <p class="mt-2 text-lg text-sl
+            <p class="mt-2 text-lg text-slate-600">Big Data Analytics in Cyber Security</p>
+        </div>
+    </header>
+
+    <nav class="sticky-nav shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center flex-wrap">
+                <a href="#ch1" class="nav-link text-slate-700 font-medium py-3 px-4 text-center">บทที่ 1: Big Data</a>
+                <a href="#ch2" class="nav-link text-slate-700 font-medium py-3 px-4 text-center">บทที่ 2: Frameworks</a>
+                <a href="#ch3" class="nav-link text-slate-700 font-medium py-3 px-4 text-center">บทที่ 3: Threats & Risks</a>
+                <a href="#ch4" class="nav-link text-slate-700 font-medium py-3 px-4 text-center">บทที่ 4: Incident Mgmt</a>
+                <a href="#ch5" class="nav-link text-slate-700 font-medium py-3 px-4 text-center">บทที่ 5: IDPS</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-16">
+
+        <!-- Chapter 1 -->
+        <section id="ch1" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold section-title mb-6 border-b-2 border-teal-200 pb-2">บทที่ 1: Introduction to Big Data Analytics in Cybersecurity</h2>
+            
+            <div class="space-y-12">
+                <!-- Q1 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">1. Data Analytics vs Data Science แตกต่างกันอย่างไร?</h3>
+                    <p class="mb-4 text-slate-600">ความแตกต่างที่สำคัญคือขอบเขตและเป้าหมาย โดย Data Science มีขอบเขตที่กว้างกว่าและเน้นการสร้างแบบจำลองเพื่อทำนายอนาคต ในขณะที่ Data Analytics เน้นการวิเคราะห์ข้อมูลในอดีตเพื่อหาข้อมูลเชิงลึกทางธุรกิจ</p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="border-l-4 border-teal-500 p-4 bg-slate-50 rounded-md">
+                            <h4 class="font-semibold text-lg text-teal-700">📊 Data Analytics (นักวิเคราะห์ข้อมูล)</h4>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                                <li><strong>เป้าหมาย:</strong> วิเคราะห์ข้อมูลในอดีตเพื่อหา Insight</li>
+                                <li><strong>ข้อมูล:</strong> ส่วนใหญ่เป็นข้อมูลที่มีโครงสร้าง (Structured Data)</li>
+                                <li><strong>ผลลัพธ์:</strong> รายงาน, แดชบอร์ด, ข้อมูลเชิงลึก</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-sky-500 p-4 bg-slate-50 rounded-md">
+                            <h4 class="font-semibold text-lg text-sky-700">🔬 Data Science (นักวิทยาศาสตร์ข้อมูล)</h4>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-slate-700">
+                                <li><strong>เป้าหมาย:</strong> สร้างแบบจำลองเพื่อทำนายอนาคต</li>
+                                <li><strong>ข้อมูล:</strong> มีโครงสร้างและไม่มีโครงสร้าง (Unstructured)</li>
+                                <li><strong>ผลลัพธ์:</strong> แบบจำลองการทำนาย, เครื่องมือใหม่ๆ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Q2 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-4">2. ประเภทการวิเคราะห์ข้อมูล (Types of Data Analytics) 4 ระดับ</h3>
+                    <p class="mb-6 text-slate-600">การวิเคราะห์ข้อมูลแบ่งได้ 4 ระดับตามความซับซ้อนและคุณค่าที่ได้รับ คลิกที่การ์ดแต่ละใบเพื่อดูคำอธิบาย</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="analytics-types">
+                        <div class="interactive-element p-4 bg-teal-50 border-t-4 border-teal-500 rounded-md text-center" data-target="desc-descriptive">
+                            <h4 class="font-bold text-teal-800 text-lg">Descriptive</h4>
+                            <p class="text-sm text-teal-600">เกิดอะไรขึ้น?</p>
+                        </div>
+                        <div class="interactive-element p-4 bg-sky-50 border-t-4 border-sky-500 rounded-md text-center" data-target="desc-diagnostic">
+                            <h4 class="font-bold text-sky-800 text-lg">Diagnostic</h4>
+                            <p class="text-sm text-sky-600">ทำไมจึงเกิดขึ้น?</p>
+                        </div>
+                        <div class="interactive-element p-4 bg-amber-50 border-t-4 border-amber-500 rounded-md text-center" data-target="desc-predictive">
+                            <h4 class="font-bold text-amber-800 text-lg">Predictive</h4>
+                            <p class="text-sm text-amber-600">จะเกิดอะไรขึ้น?</p>
+                        </div>
+                        <div class="interactive-element p-4 bg-rose-50 border-t-4 border-rose-500 rounded-md text-center" data-target="desc-prescriptive">
+                            <h4 class="font-bold text-rose-800 text-lg">Prescriptive</h4>
+                            <p class="text-sm text-rose-600">ควรทำอะไร?</p>
+                        </div>
+                    </div>
+                    <div id="analytics-descriptions" class="mt-4">
+                        <div id="desc-descriptive" class="hidden-content p-4 bg-slate-100 rounded-md"><p><strong>การวิเคราะห์เชิงพรรณนา (Descriptive):</strong> สรุปข้อมูลในอดีตเพื่อให้เห็นภาพรวมของสิ่งที่เกิดขึ้น เช่น รายงานยอดขาย, แดชบอร์ดผู้ใช้งาน</p></div>
+                        <div id="desc-diagnostic" class="hidden-content p-4 bg-slate-100 rounded-md"><p><strong>การวิเคราะห์เชิงวินิจฉัย (Diagnostic):</strong> เจาะลึกเพื่อหาสาเหตุของเหตุการณ์ที่เกิดขึ้น เช่น ทำไมยอดขายลดลงในไตรมาสที่ผ่านมา</p></div>
+                        <div id="desc-predictive" class="hidden-content p-4 bg-slate-100 rounded-md"><p><strong>การวิเคราะห์เชิงทำนาย (Predictive):</strong> ใช้ข้อมูลในอดีตเพื่อคาดการณ์แนวโน้มในอนาคต เช่น พยากรณ์ยอดขายเดือนหน้า</p></div>
+                        <div id="desc-prescriptive" class="hidden-content p-4 bg-slate-100 rounded-md"><p><strong>การวิเคราะห์เชิงให้คำแนะนำ (Prescriptive):</strong> ให้คำแนะนำการตัดสินใจที่ดีที่สุดเพื่อบรรลุเป้าหมาย เช่น ควรเสนอโปรโมชั่นใดให้ลูกค้า</p></div>
+                    </div>
+                </article>
+
+                <!-- Q3 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">3. คุณลักษณะสำคัญของ Big Data (5V's)</h3>
+                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h4 class="font-bold text-lg text-slate-700">Volume (ปริมาณ)</h4>
+                            <p class="text-slate-600">ข้อมูลมีขนาดใหญ่มากระดับ Terabytes ถึง Zettabytes</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h4 class="font-bold text-lg text-slate-700">Velocity (ความเร็ว)</h4>
+                            <p class="text-slate-600">ข้อมูลถูกสร้างและส่งผ่านอย่างรวดเร็วแบบ Real-time</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h4 class="font-bold text-lg text-slate-700">Variety (ความหลากหลาย)</h4>
+                            <p class="text-slate-600">ข้อมูลมีหลายรูปแบบ ทั้งมีโครงสร้างและไม่มีโครงสร้าง</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h4 class="font-bold text-lg text-slate-700">Veracity (ความถูกต้อง)</h4>
+                            <p class="text-slate-600">คุณภาพและความน่าเชื่อถือของข้อมูล ซึ่งอาจมีความไม่แน่นอน</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg">
+                            <h4 class="font-bold text-lg text-slate-700">Value (คุณค่า)</h4>
+                            <p class="text-slate-600">ความสามารถในการนำข้อมูลมาวิเคราะห์เพื่อสร้างประโยชน์ทางธุรกิจ</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section id="ch2" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold section-title mb-6 border-b-2 border-teal-200 pb-2">บทที่ 2: Cybersecurity Framework & Cyber Attack Framework</h2>
+            <div class="space-y-12">
+                <!-- Q4 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-4">4. 6 ฟังก์ชันหลักของ NIST Cybersecurity Framework 2.0</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-4 bg-teal-50 rounded-lg"><strong>Govern:</strong> สร้างและติดตามกลยุทธ์, นโยบายการบริหารความเสี่ยง</div>
+                        <div class="p-4 bg-teal-50 rounded-lg"><strong>Identify:</strong> ทำความเข้าใจบริบท, ทรัพย์สิน และความเสี่ยงขององค์กร</div>
+                        <div class="p-4 bg-teal-50 rounded-lg"><strong>Protect:</strong> นำมาตรการป้องกันมาใช้เพื่อจำกัดผลกระทบ</div>
+                        <div class="p-4 bg-teal-50 rounded-lg"><strong>Detect:</strong> พัฒนากระบวนการเพื่อตรวจจับเหตุการณ์ผิดปกติ</div>
+                        <div class="p-4 bg-teal-50 rounded-lg"><strong>Respond:</strong> ดำเนินการเมื่อตรวจพบเหตุการณ์เพื่อควบคุมผลกระทบ</div>
+                        <div class="p-4 bg-teal-50 rounded-lg"><strong>Recover:</strong> วางแผนและฟื้นฟูระบบให้กลับสู่สภาวะปกติ</div>
+                    </div>
+                </article>
+
+                <!-- Q6 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-4">6. 7 ขั้นตอนของ Cyber Kill Chain Framework</h3>
+                    <p class="mb-6 text-slate-600">เป็นโมเดลที่อธิบายขั้นตอนการโจมตีทางไซเบอร์ คลิกแต่ละขั้นตอนเพื่อดูรายละเอียด</p>
+                    <div class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0 md:space-x-2 text-center text-sm" id="kill-chain-nav">
+                        <button data-target="kc-1" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200 active">1. Reconnaissance</button>
+                        <span class="text-slate-400 hidden md:block">&rarr;</span>
+                        <button data-target="kc-2" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200">2. Weaponization</button>
+                        <span class="text-slate-400 hidden md:block">&rarr;</span>
+                        <button data-target="kc-3" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200">3. Delivery</button>
+                        <span class="text-slate-400 hidden md:block">&rarr;</span>
+                        <button data-target="kc-4" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200">4. Exploitation</button>
+                        <span class="text-slate-400 hidden md:block">&rarr;</span>
+                        <button data-target="kc-5" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200">5. Installation</button>
+                        <span class="text-slate-400 hidden md:block">&rarr;</span>
+                        <button data-target="kc-6" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200">6. Command & Control</button>
+                        <span class="text-slate-400 hidden md:block">&rarr;</span>
+                        <button data-target="kc-7" class="kill-chain-step w-full md:w-auto flex-1 p-2 rounded-md bg-slate-200">7. Actions on Objectives</button>
+                    </div>
+                    <div id="kill-chain-content" class="mt-4 p-4 bg-slate-100 rounded-md min-h-[100px]">
+                        <div id="kc-1"><p><strong>การลาดตระเวน (Reconnaissance):</strong> ผู้โจมตีรวบรวมข้อมูลเกี่ยวกับเป้าหมายเพื่อวางแผนการโจมตี</p></div>
+                        <div id="kc-2" class="hidden"><p><strong>การสร้างอาวุธ (Weaponization):</strong> ผู้โจมตีสร้างมัลแวร์โดยใช้ช่องโหว่ที่พบเพื่อส่งไปยังเป้าหมาย</p></div>
+                        <div id="kc-3" class="hidden"><p><strong>การนำส่ง (Delivery):</strong> ผู้โจมตีส่งมัลแวร์ไปยังเป้าหมายผ่านช่องทางต่างๆ เช่น Phishing Email</p></div>
+                        <div id="kc-4" class="hidden"><p><strong>การใช้ช่องโหว่ (Exploitation):</strong> มัลแวร์เริ่มทำงานโดยใช้ประโยชน์จากช่องโหว่ของระบบเพื่อรันโค้ดอันตราย</p></div>
+                        <div id="kc-5" class="hidden"><p><strong>การติดตั้ง (Installation):</strong> มัลแวร์ติดตั้งตัวเองลงบนเครื่องของเหยื่อเพื่อคงอยู่และรอรับคำสั่ง</p></div>
+                        <div id="kc-6" class="hidden"><p><strong>การสั่งการและควบคุม (Command & Control):</strong> มัลแวร์ติดต่อกลับไปยังเซิร์ฟเวอร์ของผู้โจมตีเพื่อรอรับคำสั่ง</p></div>
+                        <div id="kc-7" class="hidden"><p><strong>การลงมือตามเป้าหมาย (Actions on Objectives):</strong> ผู้โจมตีเริ่มดำเนินการตามเป้าหมาย เช่น ขโมยข้อมูล, เข้ารหัสไฟล์</p></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Chapter 3 -->
+        <section id="ch3" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold section-title mb-6 border-b-2 border-teal-200 pb-2">บทที่ 3: Cybersecurity Threat and Risks</h2>
+            <div class="space-y-12">
+                <!-- Q7 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">7. Information Security vs Cybersecurity</h3>
+                    <p class="text-slate-600"><strong>Information Security</strong> มีขอบเขตที่กว้างกว่า ครอบคลุมการปกป้องข้อมูลทุกรูปแบบ (ทั้งดิจิทัลและกายภาพ) ในขณะที่ <strong>Cybersecurity</strong> เป็นส่วนหนึ่งของ Information Security ที่เน้นการปกป้องสินทรัพย์ดิจิทัลในโลกไซเบอร์โดยเฉพาะ</p>
+                </article>
+
+                <!-- Q8 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-3">8. Deepfake Attack คืออะไร?</h3>
+                    <p class="mb-4 text-slate-600">คือการใช้ AI สร้างวิดีโอหรือเสียงปลอมที่แนบเนียนเพื่อหลอกลวงหรือสร้างความเสียหาย</p>
+                    <div class="bg-slate-50 p-4 rounded-lg">
+                        <p class="font-semibold">ตัวอย่าง: การหลอกโอนเงินโดยใช้เสียงปลอม (Vishing)</p>
+                        <p class="mt-2">มิจฉาชีพใช้ AI สร้างเสียงปลอมเลียนแบบผู้บริหาร แล้วโทรสั่งให้พนักงานการเงินโอนเงินด่วนไปยังบัญชีของตน</p>
+                        <p class="font-semibold mt-4">แนวทางการป้องกัน:</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>สร้างความตระหนักรู้ถึงภัยคุกคามประเภทนี้</li>
+                            <li>กำหนดกระบวนการตรวจสอบหลายชั้นสำหรับธุรกรรมสำคัญ</li>
+                            <li>หากสงสัย ให้ตั้งคำถามที่ AI ไม่น่าจะตอบได้</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Chapter 4 -->
+        <section id="ch4" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold section-title mb-6 border-b-2 border-teal-200 pb-2">บทที่ 4: Incident Management & Log Management</h2>
+            <div class="space-y-12">
+                <!-- Q10 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-4">10. วงจรการตอบสนองเหตุการณ์ (Cyber Incident Response Cycle)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                        <div class="p-4 bg-slate-100 rounded-lg">
+                            <div class="text-2xl mb-2">🛡️</div>
+                            <h4 class="font-bold">1. Preparation</h4>
+                            <p class="text-sm">การเตรียมความพร้อมก่อนเกิดเหตุ</p>
+                        </div>
+                        <div class="p-4 bg-slate-100 rounded-lg">
+                            <div class="text-2xl mb-2">🔍</div>
+                            <h4 class="font-bold">2. Detection & Analysis</h4>
+                            <p class="text-sm">การตรวจจับและวิเคราะห์เมื่อมีสัญญาณ</p>
+                        </div>
+                        <div class="p-4 bg-slate-100 rounded-lg">
+                            <div class="text-2xl mb-2">⚙️</div>
+                            <h4 class="font-bold">3. Containment, Eradication & Recovery</h4>
+                            <p class="text-sm">การจำกัดขอบเขต, กำจัด และฟื้นฟู</p>
+                        </div>
+                        <div class="p-4 bg-slate-100 rounded-lg">
+                            <div class="text-2xl mb-2">📝</div>
+                            <h4 class="font-bold">4. Post-Incident Activity</h4>
+                            <p class="text-sm">กิจกรรมหลังเกิดเหตุเพื่อเรียนรู้และปรับปรุง</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Chapter 5 -->
+        <section id="ch5" class="scroll-mt-20">
+            <h2 class="text-3xl font-bold section-title mb-6 border-b-2 border-teal-200 pb-2">บทที่ 5: Intrusion Detection and Prevention Systems (IDPS)</h2>
+            <div class="space-y-12">
+                <!-- Q13 -->
+                <article class="card bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="font-bold text-xl text-slate-800 mb-4">13. วิธีการตรวจจับ (Detection Methodologies) 3 ลักษณะ</h3>
+                    <div>
+                        <div class="border-b">
+                            <div class="flex items-center justify-between p-3 interactive-element" data-target="detect-sig">
+                                <h4 class="font-semibold text-lg">Signature-based</h4>
+                                <span class="text-teal-500 text-2xl transform transition-transform duration-300">+</span>
+                            </div>
+                            <div id="detect-sig" class="hidden-content px-3 pb-3 text-slate-600">
+                                <p><strong>หลักการ:</strong> เปรียบเทียบกิจกรรมกับฐานข้อมูล "ลายเซ็น" ของการโจมตีที่รู้จักอยู่แล้ว (Known Attacks) <br><strong>ข้อดี:</strong> แม่นยำสูงกับภัยคุกคามที่รู้จัก <br><strong>ข้อเสีย:</strong> ตรวจจับภัยคุกคามใหม่ (Zero-day) ไม่ได้</p>
+                            </div>
+                        </div>
+                        <div class="border-b">
+                            <div class="flex items-center justify-between p-3 interactive-element" data-target="detect-ano">
+                                <h4 class="font-semibold text-lg">Anomaly-based</h4>
+                                <span class="text-teal-500 text-2xl transform transition-transform duration-300">+</span>
+                            </div>
+                            <div id="detect-ano" class="hidden-content px-3 pb-3 text-slate-600">
+                                <p><strong>หลักการ:</strong> สร้าง "พฤติกรรมปกติ" (Baseline) และแจ้งเตือนเมื่อมีกิจกรรมที่เบี่ยงเบนออกไป <br><strong>ข้อดี:</strong> สามารถตรวจจับภัยคุกคามใหม่ๆ ได้ <br><strong>ข้อเสีย:</strong> อาจมี False Positive สูง</p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between p-3 interactive-element" data-target="detect-sta">
+                                <h4 class="font-semibold text-lg">Stateful Protocol Analysis</h4>
+                                 <span class="text-teal-500 text-2xl transform transition-transform duration-300">+</span>
+                            </div>
+                             <div id="detect-sta" class="hidden-content px-3 pb-3 text-slate-600">
+                                <p><strong>หลักการ:</strong> วิเคราะห์สถานะ (State) ของการสื่อสารเทียบกับมาตรฐานของโปรโตคอลนั้นๆ <br><strong>ข้อดี:</strong> แม่นยำในการตรวจจับการโจมตีที่ใช้ช่องโหว่ของโปรโตคอล <br><strong>ข้อเสีย:</strong> ใช้ทรัพยากรประมวลผลสูง</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-6 bg-slate-800 text-slate-400 mt-16">
+        <p>สร้างขึ้นเพื่อการทบทวนเนื้อหา ขอให้โชคดีกับการสอบ!</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Analytics Types Interaction
+            const analyticsTypesContainer = document.getElementById('analytics-types');
+            const analyticsDescContainer = document.getElementById('analytics-descriptions');
+            let currentAnalyticsDesc = null;
+
+            analyticsTypesContainer.addEventListener('click', function(e) {
+                const targetButton = e.target.closest('.interactive-element');
+                if (!targetButton) return;
+
+                const targetId = targetButton.dataset.target;
+                const targetDesc = document.getElementById(targetId);
+
+                if (currentAnalyticsDesc && currentAnalyticsDesc !== targetDesc) {
+                    currentAnalyticsDesc.classList.remove('visible-content');
+                }
+
+                if (targetDesc.classList.contains('visible-content')) {
+                    targetDesc.classList.remove('visible-content');
+                    currentAnalyticsDesc = null;
+                } else {
+                    targetDesc.classList.add('visible-content');
+                    currentAnalyticsDesc = targetDesc;
+                }
+            });
+
+            // Kill Chain Interaction
+            const killChainNav = document.getElementById('kill-chain-nav');
+            const killChainContent = document.getElementById('kill-chain-content');
+
+            killChainNav.addEventListener('click', function(e) {
+                const targetButton = e.target.closest('button');
+                if (!targetButton) return;
+
+                // Update button styles
+                killChainNav.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                targetButton.classList.add('active');
+
+                // Update content
+                const targetId = targetButton.dataset.target;
+                killChainContent.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+                document.getElementById(targetId).classList.remove('hidden');
+            });
+            
+            // Accordion for Detection Methodologies
+            const accordions = document.querySelectorAll('.interactive-element[data-target^="detect-"]');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', () => {
+                    const targetId = accordion.dataset.target;
+                    const targetContent = document.getElementById(targetId);
+                    const icon = accordion.querySelector('span');
+                    
+                    const isVisible = targetContent.classList.contains('visible-content');
+
+                    if (isVisible) {
+                        targetContent.classList.remove('visible-content');
+                        icon.classList.remove('rotate-45');
+                    } else {
+                        targetContent.classList.add('visible-content');
+                        icon.classList.add('rotate-45');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
