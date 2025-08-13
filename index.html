@@ -1,460 +1,87 @@
 <!DOCTYPE html>
-<html lang="th" class="scroll-smooth">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>คำตอบแบบฝึกหัดทบทวนเนื้อหาก่อนสอบกลางภาค</title>
+    <title>ทบทวนเนื้อหา: Big Data Analytics in Cybersecurity</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Stone, Teal) -->
+    <!-- Application Structure Plan: A single-page, vertical-scrolling study guide with a sticky navigation bar. The content is organized into thematic sections corresponding to the course chapters. This structure is chosen for its simplicity and directness, allowing students to either scroll sequentially or use the navigation to jump to specific topics for review. Interactivity (clicks/hovers to reveal details) is used to promote active learning over passive reading. -->
+    <!-- Visualization & Content Choices: 1. Data Analytics vs. Science: Goal=Compare, Method=Side-by-side grid, Interaction=Hover. 2. 4 Analytics Types: Goal=Organize, Method=Clickable cards, Interaction=Click-to-reveal. 3. 5V's of Big Data: Goal=Organize, Method=Interactive circle diagram, Interaction=Hover tooltips. 4. NIST CSF: Goal=Organize, Method=Clickable wheel diagram, Interaction=Click-to-reveal. 5. Kill Chain: Goal=Explain Process, Method=Horizontal step diagram, Interaction=Click-to-reveal. 6. Incident Cycle: Goal=Explain Process, Method=Clickable cycle diagram, Interaction=Click-to-reveal. All diagrams built with HTML/CSS/Tailwind. Justification: These interactive methods break down complex information into manageable chunks, improving retention for a student studying for an exam. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
         }
-        .card {
-            background-color: rgba(31, 41, 55, 0.5); /* bg-gray-800 with opacity */
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .section-title {
+            color: #0d9488; /* teal-600 */
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
+        }
+        .nav-link {
             transition: all 0.3s ease;
         }
+        .nav-link:hover {
+            color: #0d9488; /* teal-600 */
+            background-color: #f0fdfa; /* teal-50 */
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
         .card:hover {
-            border-color: rgba(129, 140, 248, 0.5); /* Indigo-400 with opacity */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        .chapter-title {
-            color: #818cf8; /* Indigo-400 */
+        .interactive-element {
+            cursor: pointer;
         }
-        .answer-container {
+        .hidden-content {
+            display: none;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
         }
-        .card.open .answer-container {
-            max-height: 1200px; /* Increased max-height for longer answers */
+        .visible-content {
+            display: block;
+            max-height: 1000px; /* Large enough to show content */
         }
-        .question-btn {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .kill-chain-step {
+            transition: all 0.3s ease;
+        }
+        .kill-chain-step.active {
+            background-color: #0d9488; /* teal-600 */
+            color: white;
+            transform: scale(1.05);
+        }
+        .chart-container {
+            position: relative;
             width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
         }
-        .chevron-icon {
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-        .card.open .chevron-icon {
-            transform: rotate(90deg);
-        }
-        .reference {
-            font-style: italic;
-            font-size: 0.875rem;
-            color: #9ca3af; /* Gray-400 */
-        }
-        .progress-bar-container {
-            background-color: #374151; /* Gray-700 */
-        }
-        .progress-bar {
-            background-color: #6366f1; /* Indigo-500 */
-            transition: width 0.5s ease;
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body class="bg-slate-50">
 
-    <!-- Header -->
-    <header class="text-center py-12 md:py-16 bg-gray-900/80 backdrop-blur-sm sticky top-0 z-10">
-        <h1 class="text-3xl md:text-5xl font-bold text-white tracking-tight">แบบฝึกหัดทบทวนเนื้อหาก่อนสอบกลางภาค</h1>
-        <p class="text-indigo-400 mt-2 text-lg">วิชา: Big Data Analytics in Cybersecurity</p>
-        
-        <!-- Progress Bar -->
-        <div class="max-w-4xl mx-auto px-4 mt-8">
-            <div class="flex justify-between items-center mb-1 text-sm">
-                <span class="text-gray-400">ความคืบหน้า</span>
-                <span id="progress-text" class="font-semibold text-indigo-300">0%</span>
-            </div>
-            <div class="w-full progress-bar-container rounded-full h-2.5">
-                <div id="progress-bar" class="progress-bar h-2.5 rounded-full" style="width: 0%"></div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 md:px-6 py-8">
-        <div class="space-y-6 max-w-4xl mx-auto" id="qa-container">
-
-            <!-- Chapter 1 -->
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <h2 class="text-lg font-semibold chapter-title mb-2">Chapter 1: Introduction to Big Data Analytics in Cybersecurity</h2>
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">1. Data Analytics กับ Data Science แตกต่างกันอย่างไร (อธิบายมาพอสังเขป)</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>Data Analytics และ Data Science เป็นสองศาสตร์ที่ทำงานกับข้อมูลเหมือนกัน แต่มีเป้าหมายและขอบเขตของงานที่แตกต่างกันอย่างชัดเจนครับ</p>
-                            <ul class="list-disc list-inside pl-2">
-                                <li><strong>Data Analytics (การวิเคราะห์ข้อมูล)</strong> จะมุ่งเน้นไปที่การนำข้อมูลที่มีอยู่มาวิเคราะห์เพื่อตอบคำถามทางธุรกิจที่เกิดขึ้นแล้ว หรือเพื่อค้นหาข้อมูลเชิงลึก (Insight) ที่ซ่อนอยู่ เปรียบเสมือนการนำข้อมูลในอดีตมาสรุปผลและทำความเข้าใจสถานการณ์ปัจจุบัน นักวิเคราะห์ข้อมูล (Data Analyst) มักจะทำงานกับข้อมูลที่มีโครงสร้าง (Structured Data) และใช้เครื่องมืออย่างสถิติและการสร้างภาพ (Data Visualization) เพื่อสื่อสารผลลัพธ์ให้คนอื่นเข้าใจได้ง่าย และนำไปใช้ตัดสินใจทางธุรกิจได้ทันที</li>
-                                <li><strong>Data Science (วิทยาศาสตร์ข้อมูล)</strong> มีขอบเขตที่กว้างกว่ามาก โดยจะครอบคลุมกระบวนการทั้งหมดตั้งแต่การตั้งคำถามใหม่ๆ ที่ยังไม่มีใครรู้คำตอบ ไปจนถึงการรวบรวมข้อมูลจากหลากหลายแหล่ง (ทั้งที่มีโครงสร้างและไม่มีโครงสร้าง) การเตรียมข้อมูล และที่สำคัญคือการสร้างแบบจำลอง (Model) เชิงพยากรณ์โดยใช้เทคนิคขั้นสูงอย่าง Machine Learning เพื่อทำนายสิ่งที่จะเกิดขึ้นในอนาคต หรือสร้างเครื่องมือใหม่ๆ เพื่อแก้ปัญหาทางธุรกิจที่ซับซ้อน</li>
-                            </ul>
-                            <p class="font-semibold text-indigo-300"><strong>ความแตกต่างที่สำคัญ:</strong> ถ้าเปรียบเทียบง่ายๆ <strong>Data Analytics คือการใช้ข้อมูลเพื่ออธิบายสิ่งที่เกิดขึ้นและทำความเข้าใจปัจจุบัน</strong> ในขณะที่ <strong>Data Science คือการใช้ข้อมูลเพื่อสร้างแบบจำลองในการทำนายอนาคตและสร้างโซลูชันใหม่ๆ</strong> ครับ</p>
-                            <p class="reference mt-4">อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 3-6)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">2. อธิบายประเภทการวิเคราะห์ข้อมูล (Types of Data Analytics) ทั้ง 4 ระดับ มาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>การวิเคราะห์ข้อมูลสามารถแบ่งออกได้เป็น 4 ระดับ ซึ่งเปรียบเสมือนขั้นบันไดของการทำความเข้าใจข้อมูล จากง่ายไปสู่ซับซ้อน ดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Descriptive Analytics (การวิเคราะห์เชิงพรรณนา):</strong> เป็นขั้นพื้นฐานที่สุด ตอบคำถามว่า <strong>"เกิดอะไรขึ้น?"</strong> (What happened?) คือการสรุปข้อมูลในอดีตให้ออกมาในรูปแบบที่เข้าใจง่าย เช่น การทำรายงานยอดขายประจำเดือน หรือการสร้างแดชบอร์ดเพื่อดูภาพรวมของข้อมูลที่เกิดขึ้น</li>
-                                <li><strong>Diagnostic Analytics (การวิเคราะห์เชิงวินิจฉัย):</strong> เป็นขั้นที่ลึกลงไปอีกขั้นเพื่อตอบคำถามว่า <strong>"ทำไมสิ่งนั้นถึงเกิดขึ้น?"</strong> (Why did it happen?) เป็นการสืบค้นหาสาเหตุของผลลัพธ์ที่เกิดขึ้นในขั้น Descriptive เช่น การวิเคราะห์ว่าทำไมยอดขายในไตรมาสที่แล้วถึงลดลง โดยอาจพบว่าเกิดจากแคมเปญการตลาดที่ไม่มีประสิทธิภาพ</li>
-                                <li><strong>Predictive Analytics (การวิเคราะห์เชิงพยากรณ์):</strong> เป็นการมองไปข้างหน้าเพื่อตอบคำถามว่า <strong>"จะเกิดอะไรขึ้นต่อไป?"</strong> (What will happen?) โดยใช้ข้อมูลในอดีตมาสร้างแบบจำลองทางสถิติหรือ Machine Learning เพื่อทำนายแนวโน้มในอนาคต เช่น การพยากรณ์ยอดขายในเดือนถัดไป หรือการทำนายว่าลูกค้าคนไหนมีแนวโน้มจะเลิกใช้บริการ</li>
-                                <li><strong>Prescriptive Analytics (การวิเคราะห์เชิงให้คำแนะนำ):</strong> เป็นขั้นสูงสุดและซับซ้อนที่สุด ตอบคำถามว่า <strong>"เราควรทำอะไรดี?"</strong> (What should we do?) โดยระบบไม่เพียงแค่ทำนายอนาคต แต่ยังสามารถให้คำแนะนำทางเลือกที่ดีที่สุดเพื่อให้ได้ผลลัพธ์ที่ต้องการ เช่น ระบบอาจแนะนำว่าควรเสนอโปรโมชันส่วนลด 15% ให้กับลูกค้ากลุ่มที่มีแนวโน้มจะเลิกใช้บริการ เพื่อรักษาลูกค้ากลุ่มนี้ไว้</li>
-                            </ol>
-                             <p class="reference mt-4">อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 7)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">3. คุณลักษณะสำคัญของ Big Data ทั้ง 5V ประกอบด้วยอะไร พร้อมอธิบายมาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>Big Data หรือข้อมูลขนาดใหญ่ มีคุณลักษณะสำคัญ 5 ประการ ที่ทำให้การจัดการและการวิเคราะห์มีความท้าทายและแตกต่างจากข้อมูลทั่วไป หรือที่เรียกว่า "5V's" ดังนี้ครับ</p>
-                             <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Volume (ปริมาณ):</strong> คือ ขนาดของข้อมูลที่มีจำนวนมหาศาล ตั้งแต่ระดับเทราไบต์ (Terabytes) ไปจนถึงเซตตาไบต์ (Zettabytes) ซึ่งระบบคอมพิวเตอร์แบบดั้งเดิมไม่สามารถจัดเก็บหรือประมวลผลได้อย่างมีประสิทธิภาพ</li>
-                                <li><strong>Velocity (ความเร็ว):</strong> คือ อัตราเร็วในการสร้างและไหลเข้าของข้อมูล ซึ่งเกิดขึ้นอย่างรวดเร็วและต่อเนื่องแบบเรียลไม์ เช่น ข้อมูลจากโซเชียลมีเดีย หรือข้อมูลจากเซ็นเซอร์ IoT ทำให้ต้องมีเทคโนโลยีที่สามารถประมวลผลข้อมูลได้อย่างทันท่วงที</li>
-                                <li><strong>Variety (ความหลากหลาย):</strong> คือ รูปแบบของข้อมูลที่มีความหลากหลายสูงมาก ไม่ได้มีแค่ข้อมูลที่มีโครงสร้างชัดเจน (Structured Data) แบบตาราง แต่ยังรวมถึงข้อมูลกึ่งมีโครงสร้าง (Semi-structured) เช่น ไฟล์ XML และข้อมูลที่ไม่มีโครงสร้าง (Unstructured Data) เช่น ข้อความ, รูปภาพ, วิดีโอ, และไฟล์เสียง</li>
-                                <li><strong>Veracity (ความถูกต้องน่าเชื่อถือ):</strong> คือ คุณภาพและความน่าเชื่อถือของข้อมูล เนื่องจากข้อมูลขนาดใหญ่มักมาจากหลายแหล่ง จึงอาจมีความไม่แน่นอน, ความไม่สมบูรณ์, หรือความขัดแย้งกันเองอยู่ ซึ่งเป็นความท้าทายในการคัดกรองและยืนยันความถูกต้องก่อนนำไปใช้งาน</li>
-                                <li><strong>Value (คุณค่า):</strong> คือ คุณค่าที่ซ่อนอยู่ในข้อมูล ซึ่งเป็นเป้าหมายสูงสุดของการทำ Big Data Analytics โดยข้อมูลมหาศาลเหล่านี้จะต้องสามารถนำมาวิเคราะห์เพื่อสร้างประโยชน์ทางธุรกิจได้จริง เช่น การเข้าใจพฤติกรรมลูกค้า, การพัฒนานวัตกรรม, หรือการตัดสินใจที่แม่นยำขึ้น</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch1_Introduction to BDA in Cybersecurity.pdf (หน้า 8-10)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chapter 2 -->
-            <div class="card rounded-xl overflow-hidden">
-                 <div class="p-6 md:p-8">
-                    <h2 class="text-lg font-semibold chapter-title mb-2">Chapter 2: Cybersecurity Framework & Cyber Attack Framework</h2>
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">4. NIST Cybersecurity Framework 2.0 ประกอบด้วยฟังก์ชันหลักคืออะไร พร้อมอธิบายแต่ละฟังก์ชันของเฟรมเวิร์กมาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>NIST Cybersecurity Framework (CSF) 2.0 เป็นกรอบการทำงานที่ช่วยให้องค์กรบริหารจัดการความเสี่ยงด้านความมั่นคงปลอดภัยไซเบอร์ได้อย่างเป็นระบบ ประกอบด้วย 6 ฟังก์ชันหลัก ซึ่งเปรียบเสมือนเสาหลักของโปรแกรมความปลอดภัยขององค์กร ดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Govern (การกำกับดูแล):</strong> เป็นฟังก์ชันใหม่ที่เพิ่มเข้ามาในเวอร์ชัน 2.0 และมีความสำคัญอย่างยิ่ง ทำหน้าที่เป็นศูนย์กลางในการกำหนดทิศทาง, กลยุทธ์, และนโยบายด้านความปลอดภัยไซเบอร์ขององค์กรให้สอดคล้องกับเป้าหมายทางธุรกิจโดยรวม และเพื่อให้มั่นใจว่ามีการบริหารจัดการความเสี่ยงอย่างเหมาะสม</li>
-                                <li><strong>Identify (การระบุ):</strong> คือการทำความเข้าใจในสินทรัพย์ (Assets) ที่องค์กรมี เช่น ข้อมูล, ระบบ, อุปกรณ์ต่างๆ และประเมินความเสี่ยงที่อาจเกิดขึ้นกับสินทรัพย์เหล่านั้น เพื่อให้รู้ว่าองค์กรจำเป็นต้องปกป้องอะไร และมีความเสี่ยงอะไรบ้าง</li>
-                                <li><strong>Protect (การป้องกัน):</strong> คือการนำมาตรการควบคุมต่างๆ มาใช้เพื่อป้องกันสินทรัพย์ที่สำคัญตามที่ระบุไว้ในขั้น Identify เช่น การควบคุมการเข้าถึง, การฝึกอบรมพนักงาน, การรักษาความปลอดภัยของข้อมูล เพื่อลดโอกาสในการเกิดเหตุการณ์ไม่พึงประสงค์</li>
-                                <li><strong>Detect (การตรวจจับ):</strong> คือการติดตั้งระบบเฝ้าระวังและกระบวนการต่างๆ เพื่อให้สามารถตรวจจับกิจกรรมที่น่าสงสัยหรือการโจมตีทางไซเบอร์ที่อาจเกิดขึ้นได้อย่างรวดเร็วที่สุด</li>
-                                <li><strong>Respond (การตอบสนอง):</strong> คือการวางแผนและเตรียมกระบวนการเพื่อตอบสนองต่อเหตุการณ์ที่ตรวจพบ เช่น การจำกัดความเสียหาย, การวิเคราะห์เหตุการณ์, และการสื่อสารกับผู้ที่เกี่ยวข้อง เพื่อให้สามารถจัดการกับสถานการณ์ได้อย่างมีประสิทธิภาพ</li>
-                                <li><strong>Recover (การฟื้นฟู):</strong> คือการวางแผนและเตรียมการเพื่อกู้คืนระบบและการดำเนินงานให้กลับสู่ภาวะปกติโดยเร็วที่สุดหลังจากเกิดเหตุการณ์ และลดผลกระทบต่อธุรกิจให้น้อยที่สุด</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 11-17)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">5. ขั้นตอนทั้ง 5 ของการสร้าง Cybersecurity Framework (CSF) Organizational Profile ตามหลักการของ NIST ประกอบอะไร</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                             <p>การสร้างและใช้งาน CSF Organizational Profile เป็นกระบวนการที่ช่วยให้องค์กรสามารถนำ Framework ไปปรับใช้ให้เข้ากับบริบทของตนเองได้ ซึ่งเป็นวงจรของการพัฒนาอย่างต่อเนื่อง มี 5 ขั้นตอนหลักดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Scope the Organizational Profile (กำหนดขอบเขต):</strong> เริ่มต้นด้วยการตัดสินใจว่าเราจะสร้าง Profile นี้เพื่อใคร จะใช้กับทั้งองค์กร, แผนกใดแผนกหนึ่ง, หรือเฉพาะระบบงานที่สำคัญ เพื่อให้การดำเนินการมีเป้าหมายที่ชัดเจน</li>
-                                <li><strong>Gather needed information (รวบรวมข้อมูลที่จำเป็น):</strong> รวบรวมข้อมูลเกี่ยวกับสถานะปัจจุบันขององค์กร ทั้งนโยบาย, กระบวนการ, และเทคโนโลยีด้านความปลอดภัยไซเบอร์ที่ใช้งานอยู่ เพื่อทำความเข้าใจว่าตอนนี้เรายืนอยู่จุดไหน</li>
-                                <li><strong>Create the Organizational Profile (สร้าง Profile):</strong> นำข้อมูลที่รวบรวมได้มาสร้าง "Profile สถานะปัจจุบัน" (Current State Profile) และกำหนด "Profile สถานะเป้าหมาย" (Target State Profile) ที่องค์กรต้องการจะเป็นในอนาคต โดยอ้างอิงตามหมวดหมู่ต่างๆ ใน Framework</li>
-                                <li><strong>Analyze gaps and create an action plan (วิเคราะห์ช่องว่างและสร้างแผนปฏิบัติการ):</strong> เปรียบเทียบระหว่าง Profile ปัจจุบันและเป้าหมาย เพื่อมองหา "ช่องว่าง" (Gaps) หรือจุดที่ต้องพัฒนา จากนั้นจัดลำดับความสำคัญและสร้างแผนปฏิบัติการ (Action Plan) ที่ชัดเจนว่าจะต้องทำอะไร, อย่างไร, และเมื่อไหร่ เพื่อไปให้ถึงเป้าหมาย</li>
-                                <li><strong>Implement action plan and update Profile (ดำเนินการตามแผนและปรับปรุง Profile):</strong> นำแผนปฏิบัติการที่วางไว้ไปปฏิบัติจริง และที่สำคัญคือต้องมีการทบทวนและปรับปรุง Profile อยู่เสมอ เพื่อให้สอดคล้องกับการเปลี่ยนแปลงทางธุรกิจและภัยคุกคามที่เกิดขึ้นใหม่ๆ อยู่ตลอดเวลา</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 27)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">6. อธิบายแต่ละขั้นตอนใน Cyber Kill Chain framework มาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>Cyber Kill Chain framework คือแบบจำลองที่อธิบายลำดับขั้นตอนการโจมตีทางไซเบอร์จากมุมมองของผู้โจมตี เปรียบเสมือน "ห่วงโซ่" ที่หากเราสามารถทำลายข้อใดข้อหนึ่งได้ ก็จะสามารถหยุดยั้งการโจมตีทั้งหมดได้ ประกอบด้วย 7 ขั้นตอนดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Reconnaissance (การลาดตระเวน):</strong> เป็นขั้นตอนแรกที่ผู้โจมตีจะสอดแนมและรวบรวมข้อมูลเกี่ยวกับเป้าหมายให้ได้มากที่สุด เช่น โครงสร้างองค์กร, อีเมลพนักงาน, เทคโนโลยีที่ใช้ เพื่อค้นหาจุดอ่อนและวางแผนการโจมตี</li>
-                                <li><strong>Weaponization (การสร้างอาวุธ):</strong> หลังจากได้ข้อมูลแล้ว ผู้โจมตีจะสร้าง "อาวุธไซเบอร์" ซึ่งก็คือมัลแวร์ (Malware) ที่ออกแบบมาโดยเฉพาะเพื่อใช้ประโยชน์จากช่องโหว่ที่พบ เช่น การสร้างไฟล์เอกสารที่มีโค้ดอันตรายฝังอยู่</li>
-                                <li><strong>Delivery (การนำส่ง):</strong> ผู้โจมตีจะส่งอาวุธที่สร้างขึ้นไปยังเป้าหมาย ผ่านช่องทางต่างๆ ที่คาดว่าจะได้ผลที่สุด เช่น การส่งอีเมลหลอกลวง (Phishing), การล่อให้คลิกลิงก์บนเว็บไซต์, หรือการใช้ USB Drive ที่ติดไวรัส</li>
-                                <li><strong>Exploitation (การใช้ช่องโหว่โจมตี):</strong> เมื่อเหยื่อหลงกลและเปิดไฟล์หรือคลิกลิงก์ "อาวุธ" ที่ส่งมาจะเริ่มทำงาน โดยใช้ประโยชน์จากช่องโหว่ (Vulnerability) ของซอฟต์แวร์ในเครื่องของเหยื่อเพื่อแทรกซึมและรันโค้ดอันตราย</li>
-                                <li><strong>Installation (การติดตั้ง):</strong> เมื่อเจาะระบบได้แล้ว มัลแวร์จะทำการติดตั้งตัวเองลงในระบบของเหยื่อ เพื่อให้มันสามารถทำงานต่อไปได้เรื่อยๆ และยากต่อการถูกตรวจจับหรือลบออก</li>
-                                <li><strong>Command & Control (C2) (การสั่งการและควบคุม):</strong> มัลแวร์ที่ติดตั้งแล้วจะทำการเชื่อมต่อกลับไปยังเซิร์ฟเวอร์ของผู้โจมตี เพื่อสร้างช่องทางลับสำหรับการควบคุมจากระยะไกล ทำให้ผู้โจมตีสามารถสั่งการเครื่องของเหยื่อได้ตามต้องการ</li>
-                                <li><strong>Actions on Objectives (การดำเนินการตามเป้าหมาย):</strong> ในขั้นตอนสุดท้ายนี้ ผู้โจมตีจะใช้ช่องทาง C2 ที่สร้างขึ้นเพื่อลงมือทำตามเป้าหมายที่วางไว้ เช่น ขโมยข้อมูลสำคัญ, ทำลายระบบ, หรือเข้ารหัสไฟล์เพื่อเรียกค่าไถ่</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch2_CybersecurityFramework-2025.pdf (หน้า 37-45)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chapter 3 -->
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <h2 class="text-lg font-semibold chapter-title mb-2">Chapter 3: Cybersecurity Threat and Risks and Awareness Information for Cybersecurity</h2>
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">7. อธิบายความแตกต่างระหว่าง Information Security และ Cybersecurity</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>แม้ว่าสองคำนี้มักจะถูกใช้สลับกัน แต่แท้จริงแล้ว Information Security และ Cybersecurity มีความหมายและขอบเขตที่แตกต่างกันครับ</p>
-                             <ul class="list-disc list-inside pl-2">
-                                <li><strong>Information Security (ความมั่นคงปลอดภัยสารสนเทศ)</strong> มีขอบเขตที่ <strong>กว้างกว่า</strong> โดยมุ่งเน้นการปกป้อง "ข้อมูล" (Information) ในทุกรูปแบบ ไม่ว่าข้อมูลนั้นจะอยู่ในรูปแบบดิจิทัลบนคอมพิวเตอร์ หรืออยู่ในรูปแบบกายภาพ เช่น เอกสารที่พิมพ์บนกระดาษ หรือแม้แต่ข้อมูลในความคิดของคน โดยมีเป้าหมายหลักเพื่อรักษาคุณสมบัติ 3 ประการของข้อมูล คือ ความลับ (Confidentiality), ความถูกต้องครบถ้วน (Integrity), และความพร้อมใช้งาน (Availability) หรือ CIA Triad</li>
-                                <li><strong>Cybersecurity (ความมั่นคงปลอดภัยไซเบอร์)</strong> เป็น <strong>ส่วนหนึ่ง</strong> ของ Information Security ที่มุ่งเน้นการปกป้องข้อมูลและสินทรัพย์ใน <strong>โลกดิจิทัลหรือโลกไซเบอร์</strong> โดยเฉพาะ ซึ่งหมายถึงการป้องกันระบบคอมพิวเตอร์, เครือข่าย, อุปกรณ์ และโปรแกรมต่างๆ จากภัยคุกคามและการโจมตีทางไซเบอร์</li>
-                            </ul>
-                            <p class="font-semibold text-indigo-300"><strong>ความแตกต่างที่สำคัญ:</strong> ให้ลองนึกภาพว่า <strong>Information Security คือการปกป้อง "ห้องสมุด" ทั้งหมด</strong> ซึ่งรวมถึงหนังสือกระดาษ, ไมโครฟิล์ม และระบบคอมพิวเตอร์ ในขณะที่ <strong>Cybersecurity คือการปกป้อง "ระบบคอมพิวเตอร์และเครือข่าย" ของห้องสมุด</strong> จากแฮกเกอร์และไวรัสโดยเฉพาะครับ</p>
-                            <p class="reference mt-4">อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 4-8)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">8. อธิบาย Deepfake Attack คืออะไร พร้อมยกตัวอย่างการโจมตีลักษณะนี้มา 1 ตัวอย่างและแนวทางการป้องกัน</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p><strong>Deepfake Attack</strong> คือ การโจมตีรูปแบบหนึ่งที่ใช้เทคโนโลยีปัญญาประดิษฐ์ (AI) ขั้นสูงในการสร้างสื่อสังเคราะห์ปลอม ไม่ว่าจะเป็นวิดีโอ, ภาพ หรือเสียง ที่สามารถเลียนแบบใบหน้าและน้ำเสียงของบุคคลเป้าหมายได้อย่างแนบเนียนและสมจริงอย่างน่าทึ่ง จุดประสงค์หลักคือเพื่อใช้หลอกลวงให้เหยื่อหลงเชื่อว่าเป็นบุคคลนั้นจริงๆ แล้วนำไปสู่การฉ้อโกง, สร้างความเสียหายต่อชื่อเสียง, หรือเผยแพร่ข้อมูลเท็จ</p>
-                            <p><strong>ตัวอย่างการโจมตี:</strong> มีกรณีที่มิจฉาชีพใช้เทคโนโลยี Deepfake สร้างวิดีโอปลอมเป็น <strong>ปลัดกระทรวงมหาดไทย</strong> แล้วโทรศัพท์ไปหานายอำเภอ โดยเลียนแบบทั้งภาพและเสียงได้อย่างสมจริง เพื่อหลอกให้นายอำเภอช่วยโอนเงินเกือบแสนบาท โดยอ้างเหตุผลความจำเป็นเร่งด่วนต่างๆ ซึ่งเป็นตัวอย่างที่แสดงให้เห็นถึงความอันตรายของเทคโนโลยีนี้ที่สามารถปลอมเป็นบุคคลที่น่าเชื่อถือเพื่อหลอกลวงได้</p>
-                            <p><strong>แนวทางการป้องกัน:</strong> เนื่องจาก Deepfake มีความสมจริงสูง การป้องกันจึงต้องอาศัยความรอบคอบและมีสติเป็นอย่างมากครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>ตั้งสติและตั้งข้อสงสัย:</strong> หากได้รับการติดต่อจากบุคคลใดก็ตาม ไม่ว่าจะเป็นคนรู้จักหรือบุคคลสาธารณะ เพื่อขอข้อมูลส่วนตัวหรือขอให้ทำธุรกรรมทางการเงินอย่างเร่งด่วน ควรตั้งข้อสงสัยไว้ก่อนเสมอ</li>
-                                <li><strong>สังเกตความผิดปกติ:</strong> แม้จะสมจริง แต่ Deepfake อาจยังมีจุดบกพร่องเล็กๆ น้อยๆ ให้สังเกตได้ เช่น การกะพริบตาที่ไม่เป็นธรรมชาติ, สีผิวหรือแสงเงาที่ผิดเพี้ยน, ริมฝีปากที่ขยับไม่ตรงกับเสียง หรือน้ำเสียงที่ราบเรียบไร้อารมณ์</li>
-                                <li><strong>ตรวจสอบผ่านช่องทางอื่น (Verify):</strong> นี่คือวิธีที่ดีที่สุดครับ หากมีคนรู้จักติดต่อมาขอความช่วยเหลือ ควรวางสายแล้วโทรกลับไปที่เบอร์โทรศัพท์ของบุคคลนั้นที่เราบันทึกไว้เอง หรือติดต่อผ่านช่องทางอื่นที่มั่นใจได้ เพื่อยืนยันว่าเป็นตัวจริง ไม่ควรเชื่อการติดต่อที่เข้ามาหาเราเพียงฝ่ายเดียว</li>
-                                <li><strong>ติดตามข่าวสาร:</strong> การรับรู้ข่าวสารเกี่ยวกับกลโกงและเทคโนโลยีใหม่ๆ ของมิจฉาชีพ จะช่วยให้เรารู้เท่าทันและไม่ตกเป็นเหยื่อได้ง่ายครับ</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 26-28)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">9. Spyware-Applications และ Adware-Applications แตกต่างกันอย่างไร</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>Spyware และ Adware เป็นซอฟต์แวร์ไม่พึงประสงค์ทั้งคู่ แต่มีวัตถุประสงค์และวิธีการทำงานที่แตกต่างกันอย่างชัดเจนครับ</p>
-                            <ul class="list-disc list-inside pl-2">
-                                <li><strong>Spyware (สปายแวร์):</strong> เปรียบเสมือน "สายลับ" ที่แอบลักลอบเข้ามาในเครื่องคอมพิวเตอร์ของเรา <strong>โดยที่เราไม่รู้ตัวและไม่ยินยอม</strong> วัตถุประสงค์หลักของมันคือการสอดแนมและขโมยข้อมูลสำคัญ เช่น รหัสผ่าน, ข้อมูลบัตรเครดิต, หรือพฤติกรรมการใช้งานต่างๆ แล้วส่งกลับไปให้ผู้สร้าง ซึ่งถือเป็นภัยคุกคามที่อันตรายอย่างยิ่ง</li>
-                                <li><strong>Adware (แอดแวร์):</strong> เปรียบเสมือน "พนักงานแจกใบปลิว" ที่น่ารำคาญ วัตถุประสงค์หลักของมันคือการแสดงโฆษณาป๊อปอัปต่างๆ บนเครื่องของเรา โดยมักจะแฝงตัวมากับโปรแกรมฟรีที่เราดาวน์โหลดมาติดตั้ง ซึ่งในขั้นตอนการติดตั้ง เราอาจจะเผลอ <strong>"ยินยอม"</strong> ให้มันติดตั้งลงในเครื่องโดยไม่รู้ตัว แม้จะไม่ขโมยข้อมูลร้ายแรงเท่า Spyware แต่ก็สร้างความรำคาญและอาจทำให้เครื่องทำงานช้าลง</li>
-                            </ul>
-                             <p class="font-semibold text-indigo-300"><strong>ความแตกต่างที่สำคัญ:</strong> อยู่ที่ <strong>"เจตนา"</strong> และ <strong>"การได้รับอนุญาต"</strong> ครับ <strong>Spyware มีเจตนาที่เป็นอันตราย (ขโมยข้อมูล) และทำงานโดยไม่ได้รับอนุญาต</strong> ในขณะที่ <strong>Adware มีเจตนาทางการค้า (แสดงโฆษณา) และมักจะอาศัยการอนุญาตแบบแฝงจากผู้ใช้</strong> ครับ</p>
-                            <p class="reference mt-4">อ้างอิง: Ch3_Threat - Risks and Awareness-2025.pdf (หน้า 34)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chapter 4 -->
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <h2 class="text-lg font-semibold chapter-title mb-2">Chapter 4: Incident Management and Cyber Resilience Framework & Log Management</h2>
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">10. อธิบายวงจรการตอบสนองเหตุการณ์ (Cyber Incident Response Cycle) มาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>วงจรการตอบสนองเหตุการณ์ทางไซเบอร์ หรือ Cyber Incident Response Cycle คือกระบวนการที่เป็นระบบและต่อเนื่องสำหรับจัดการกับเหตุการณ์ไม่พึงประสงค์ด้านความปลอดภัย ตั้งแต่การเตรียมตัวไปจนถึงการเรียนรู้เพื่อป้องกันเหตุในอนาคต ตามแนวทางของ NIST ประกอบด้วย 4 ขั้นตอนหลักดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Preparation (การเตรียมความพร้อม):</strong> เป็นขั้นตอนเชิงรุกที่ทำ "ก่อน" เกิดเหตุ คือการวางแผนและเตรียมทรัพยากรให้พร้อมรับมือ เช่น การจัดตั้งทีมรับมือเหตุการณ์ (Incident Response Team), การเตรียมเครื่องมือที่จำเป็น, และการฝึกอบรมบุคลากร เพื่อให้แน่ใจว่าเมื่อเกิดเหตุการณ์ขึ้น ทุกคนจะรู้หน้าที่และสามารถจัดการได้อย่างรวดเร็ว</li>
-                                <li><strong>Detection & Analysis (การตรวจจับและวิเคราะห์):</strong> เป็นขั้นตอนของการเฝ้าระวังเพื่อตรวจหาสัญญาณบ่งชี้ว่าอาจมีเหตุการณ์เกิดขึ้น เมื่อตรวจพบแล้ว จะต้องทำการวิเคราะห์เพื่อยืนยันว่าเป็นเหตุการณ์จริงหรือไม่, ประเมินความรุนแรงและขอบเขตของผลกระทบ เพื่อจัดลำดับความสำคัญในการตอบสนอง</li>
-                                <li><strong>Containment, Eradication & Recovery (การจำกัดวง, การกำจัด, และการกู้คืน):</strong> เป็นขั้นตอนการลงมือปฏิบัติเพื่อควบคุมสถานการณ์ โดยเริ่มจาก <strong>Containment</strong> คือการจำกัดความเสียหายไม่ให้ลุกลาม, ต่อด้วย <strong>Eradication</strong> คือการกำจัดต้นตอของปัญหาให้หมดสิ้น เช่น การลบมัลแวร์, และสุดท้ายคือ <strong>Recovery</strong> คือการกู้คืนระบบที่ได้รับผลกระทบให้กลับมาทำงานเป็นปกติและปลอดภัยอีกครั้ง</li>
-                                <li><strong>Post-incident Activity (กิจกรรมหลังเกิดเหตุ):</strong> เป็นขั้นตอนที่สำคัญมากแต่มักถูกมองข้าม คือการทบทวนและเรียนรู้จากเหตุการณ์ที่เพิ่งผ่านไป หรือ "Lessons Learned" เพื่อวิเคราะห์ว่ากระบวนการรับมือมีจุดไหนที่ทำได้ดี และมีจุดไหนที่ควรปรับปรุงแก้ไข เพื่อนำไปพัฒนากแผนการเตรียมความพร้อม (Preparation) ให้ดียิ่งขึ้น เป็นการปิดวงจรและเริ่มต้นใหม่เพื่อความแข็งแกร่งกว่าเดิม</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch4_Incident Management and Cyber Resilience Framework _ Log.pdf (หน้า 13-14)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">11. อธิบายองค์ประกอบการจัดการบันทึกเหตุการณ์ (Log Management) ทั้ง 4 มาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>การจัดการบันทึกเหตุการณ์ หรือ Log Management คือกระบวนการบริหารจัดการข้อมูล Log ซึ่งเป็นบันทึกกิจกรรมต่างๆ ที่เกิดขึ้นในระบบคอมพิวเตอร์และเครือข่าย ถือเป็นหัวใจสำคัญของการตรวจจับและสืบสวนภัยคุกคามทางไซเบอร์ มีองค์ประกอบหลัก 4 ส่วนที่ทำงานต่อเนื่องกันเป็นวงจรชีวิตของ Log ดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Log Generation (การสร้าง Log):</strong> เป็นจุดเริ่มต้น คือการกำหนดค่าให้อุปกรณ์และระบบต่างๆ (เช่น Firewall, Server, Application) ทำการบันทึกกิจกรรมที่สำคัญลงในไฟล์ Log โดยต้องกำหนดว่าจะบันทึกอะไรบ้าง และบันทึกในระดับความละเอียดแค่ไหน</li>
-                                <li><strong>Log Transmission (การส่ง Log):</strong> เนื่องจาก Log ถูกสร้างขึ้นจากอุปกรณ์จำนวนมากที่กระจายอยู่ทั่วทั้งองค์กร ขั้นตอนนี้จึงเป็นการรวบรวม Log จากทุกแหล่งมาจัดเก็บไว้ที่ศูนย์กลาง (Centralized Log Management) อย่างปลอดภัย เพื่อให้ง่ายต่อการบริหารจัดการและป้องกันการถูกลบหรือแก้ไข</li>
-                                <li><strong>Log Storage and Disposal (การจัดเก็บและทำลาย Log):</strong> เป็นการกำหนดนโยบายในการจัดเก็บ Log ที่รวบรวมมา เช่น จะเก็บไว้นานเท่าไหร่ (ตามกฎหมายหรือนโยบายองค์กร), จัดเก็บในรูปแบบใดเพื่อให้ค้นหาได้ง่ายและปลอดภัย, และมีกระบวนการทำลาย Log ที่ปลอดภัยเมื่อครบกำหนดเวลา</li>
-                                <li><strong>Log Analysis (การวิเคราะห์ Log):</strong> เป็นขั้นตอนที่นำ Log มาใช้ให้เกิดประโยชน์สูงสุด คือการนำข้อมูล Log มาวิเคราะห์เพื่อค้นหาสิ่งผิดปกติ, รูปแบบการโจมตี, หรือร่องรอยของภัยคุกคาม ซึ่งอาจทำได้ทั้งแบบอัตโนมัติโดยใช้เครื่องมือ หรือการวิเคราะห์โดยผู้เชี่ยวชาญ</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch4_Incident Management and Cyber Resilience Framework _ Log.pdf (หน้า 46)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chapter 5 -->
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <h2 class="text-lg font-semibold chapter-title mb-2">Chapter 5: Intrusion Detection and Prevention Systems</h2>
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">12. อธิบาย 3 ฟังก์ชั่นหลักของ Intrusion Prevention Systems (IPS) พร้อมยกตัวอย่างการทำงานของทั้ง 3 ฟังก์ชั่น</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>Intrusion Prevention System (IPS) หรือระบบป้องกันการบุกรุก เป็นระบบรักษาความปลอดภัยที่ไม่ได้ทำหน้าที่แค่ "ตรวจจับ" (Detect) เหมือน IDS แต่ยังสามารถ "ป้องกัน" (Prevent) ได้ด้วย โดยมี 3 ฟังก์ชันการทำงานหลักดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>หยุดการโจมตีโดยตรง (Stops the attack itself):</strong> นี่คือความสามารถหลักของ IPS ในการยับยั้งภัยคุกคามที่ตรวจพบได้แบบทันที
-                                    <ul class="list-disc list-inside ml-4"><li><strong>ตัวอย่าง:</strong> เมื่อมีข้อมูลวิ่งผ่าน IPS และระบบตรวจพบว่าข้อมูลนั้นมีลักษณะตรงกับ Signature ของไวรัสที่รู้จัก IPS จะทำการ "ทิ้ง" (Drop) แพ็กเก็ตข้อมูลนั้นทันที ไม่ปล่อยให้มันเดินทางต่อไปถึงเครื่องเป้าหมาย ทำให้การโจมตีล้มเหลวตั้งแต่เริ่มต้น</li></ul>
-                                </li>
-                                <li><strong>เปลี่ยนแปลงสภาพแวดล้อมความปลอดภัย (Changes the security environment):</strong> IPS สามารถทำงานร่วมกับอุปกรณ์อื่นเพื่อปรับเปลี่ยนสภาพแวดล้อมให้การโจมตีทำได้ยากขึ้น
-                                    <ul class="list-disc list-inside ml-4"><li><strong>ตัวอย่าง:</strong> หาก IPS ตรวจพบว่ามี IP Address หนึ่งพยายามสแกนหาช่องโหว่ในเครือข่ายซ้ำๆ มันสามารถส่งคำสั่งไปแก้ไขกฎบนอุปกรณ์ Firewall โดยอัตโนมัติ ให้ทำการ "บล็อก" (Block) การเชื่อมต่อทุกชนิดจาก IP Address นั้นเป็นการชั่วคราว</li></ul>
-                                </li>
-                                <li><strong>เปลี่ยนแปลงเนื้อหาของการโจมตี (Changes the attack's content):</strong> IPS บางชนิดมีความสามารถในการ "ทำความสะอาด" ข้อมูลที่เป็นอันตรายออกไป แล้วส่งต่อเฉพาะส่วนที่ปลอดภัย
-                                    <ul class="list-disc list-inside ml-4"><li><strong>ตัวอย่าง:</strong> เมื่อมีอีเมลหลอกลวง (Phishing) ที่มีลิงก์อันตรายแนบมาส่งผ่านเข้ามา IPS สามารถตรวจจับและ "ลบ" หรือ "แก้ไข" เฉพาะลิงก์ที่เป็นอันตรายนั้นออกจากเนื้อหาอีเมล แล้วจึงส่งอีเมลฉบับที่ปลอดภัยแล้วไปยังผู้รับปลายทาง</li></ul>
-                                </li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 6-8)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">13. อธิบายวิธีการตรวจจับ (Detection Methodologies) ทั้ง 3 ลักษณะ มาพอสังเขป อันได้แก่ Signature-based Detection, Anomaly-based Detection และ Stateful Protocol Analysis Detection</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>ระบบตรวจจับการบุกรุกมีเทคนิคในการ "มองหา" สิ่งผิดปกติอยู่ 3 วิธีหลัก ซึ่งแต่ละวิธีก็มีจุดเด่นและจุดด้อยแตกต่างกันไปครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Signature-based Detection (การตรวจจับตามลายเซ็น):</strong> วิธีนี้เปรียบเสมือนการมี "แฟ้มประวัติอาชญากร" ระบบจะนำข้อมูลที่วิ่งผ่านเครือข่ายมาเปรียบเทียบกับฐานข้อมูลของรูปแบบการโจมตี (Signature) ที่เคยเกิดขึ้นแล้วและรู้จักกันดี หากมีข้อมูลส่วนใดตรงกับรูปแบบในฐานข้อมูล ระบบก็จะส่งเสียงเตือนทันที
-                                    <ul class="list-disc list-inside ml-4">
-                                        <li><strong>จุดเด่น:</strong> แม่นยำมากในการตรวจจับภัยคุกคามที่รู้จักแล้ว และเกิดข้อผิดพลาด (False Positive) น้อย</li>
-                                        <li><strong>จุดด้อย:</strong> ไม่สามารถตรวจจับการโจมตีรูปแบบใหม่ๆ หรือ Zero-day Attack ที่ยังไม่มีประวัติในแฟ้มได้เลย</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Anomaly-based Detection (การตรวจจับความผิดปกติ):</strong> วิธีนี้เปรียบเสมือนการ "เรียนรู้พฤติกรรมปกติ" ระบบจะใช้เวลาเรียนรู้และสร้างโปรไฟล์ว่าการใช้งานเครือข่ายในภาวะปกติเป็นอย่างไร (Baseline) จากนั้นจะคอยส่องอยู่ตลอดเวลา หากมีกิจกรรมใดที่ "ผิดปกติ" หรือเบี่ยงเบนไปจาก Baseline ที่เรียนรู้ไว้มากเกินไป ระบบก็จะแจ้งเตือนว่าอาจมีสิ่งผิดปกติเกิดขึ้น
-                                     <ul class="list-disc list-inside ml-4">
-                                        <li><strong>จุดเด่น:</strong> สามารถตรวจจับการโจมตีรูปแบบใหม่ๆ ที่ไม่เคยรู้จักมาก่อนได้</li>
-                                        <li><strong>จุดด้อย:</strong> มีโอกาสเกิดการแจ้งเตือนที่ผิดพลาด (False Positive) ได้สูง หากมีกิจกรรมใหม่ๆ ที่ไม่เคยทำมาก่อนแต่ไม่ใช่การโจมตีเกิดขึ้น</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Stateful Protocol Analysis Detection (การตรวจจับโดยวิเคราะห์สถานะของโปรโตคอล):</strong> วิธีนี้เปรียบเสมือนการมี "ผู้เชี่ยวชาญที่เข้าใจกฎกติกา" ของการสื่อสารในแต่ละโปรโตคอล (เช่น HTTP, FTP) เป็นอย่างดี ระบบจะคอยตรวจสอบว่าการสื่อสารนั้นเป็นไปตาม "กฎ" ที่ถูกต้องของโปรโตคอลหรือไม่ หากมีการกระทำที่ผิดกฎ เช่น การส่งคำสั่งในลำดับที่ผิดเพี้ยนไป ระบบก็จะถือว่าเป็นการโจมตี
-                                    <ul class="list-disc list-inside ml-4">
-                                        <li><strong>จุดเด่น:</strong> มีความแม่นยำในการตรวจจับการโจมตีที่พยายามใช้ช่องโหว่ของโปรโตคอล</li>
-                                        <li><strong>จุดด้อย:</strong> ไม่สามารถตรวจจับการโจมตีที่ไม่ได้ละเมิดกฎของโปรโตคอลได้ และต้องใช้ทรัพยากรในการประมวลผลสูง</li>
-                                    </ul>
-                                </li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 11-20)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card rounded-xl overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <button class="question-btn text-left">
-                        <h3 class="text-xl font-bold text-white">14. องค์ประกอบของ IDPS ประกอบด้วยอะไร พร้อมอธิบายหน้าที่ของแต่ละองค์ประกอบ มาพอสังเขป</h3>
-                        <svg class="chevron-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                    </button>
-                    <div class="answer-container">
-                        <div class="pt-4 space-y-3 text-gray-300 leading-relaxed">
-                            <p>ระบบตรวจจับและป้องกันการบุกรุก (IDPS) ที่สมบูรณ์นั้น ไม่ได้ทำงานด้วยตัวคนเดียว แต่ประกอบด้วยส่วนต่างๆ ที่ทำงานประสานกันเหมือนทีมรักษาความปลอดภัย ซึ่งมี 4 องค์ประกอบหลักดังนี้ครับ</p>
-                            <ol class="list-decimal list-inside space-y-2">
-                                <li><strong>Sensor or Agent (เซ็นเซอร์ หรือ เอเจนต์):</strong> เปรียบเสมือน "ยาม" หรือ "กล้องวงจรปิด" ที่คอยสอดส่องและรวบรวมข้อมูลในจุดต่างๆ
-                                    <ul class="list-disc list-inside ml-4">
-                                        <li><strong>Sensor:</strong> จะถูกวางไว้ในเครือข่ายเพื่อดักจับและตรวจสอบข้อมูล (Packet) ที่วิ่งผ่านไปมา</li>
-                                        <li><strong>Agent:</strong> จะเป็นซอฟต์แวร์ที่ถูกติดตั้งไว้บนเครื่องคอมพิวเตอร์ (Host) เพื่อคอยตรวจสอบกิจกรรมที่เกิดขึ้นภายในเครื่องนั้นๆ</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Management Server (เซิร์ฟเวอร์จัดการ):</strong> เปรียบเสมือน "ห้องควบคุมกลาง" ที่รับข้อมูลทั้งหมดจากยามและกล้องวงจรปิด (Sensors/Agents) ทั่วทั้งองค์กรมาประมวลผลและวิเคราะห์ในภาพรวม ทำให้สามารถมองเห็นการโจมตีที่ซับซ้อนซึ่งอาจเกิดขึ้นจากหลายจุดพร้อมกันได้</li>
-                                <li><strong>Database Server (เซิร์ฟเวอร์ฐานข้อมูล):</strong> เปรียบเสมือน "ห้องเก็บหลักฐาน" ทำหน้าที่จัดเก็บบันทึกเหตุการณ์ (Logs) ทั้งหมดที่ Management Server วิเคราะห์แล้วอย่างเป็นระบบ เพื่อใช้ในการตรวจสอบย้อนหลัง, การสืบสวนเชิงลึก (Forensics) หรือการออกรายงาน</li>
-                                <li><strong>Console (คอนโซล):</strong> เปรียบเสมือน "จอภาพและแผงควบคุม" สำหรับผู้ดูแลระบบ (Admin) เป็นหน้าจอที่ใช้แสดงผลการแจ้งเตือนต่างๆ, ดูรายงาน, และใช้ในการปรับแต่งค่าการทำงานของระบบ IDPS ทั้งหมด</li>
-                            </ol>
-                            <p class="reference mt-4">อ้างอิง: Ch5_Intrusion Detection and Prevention Systems-2025.pdf (หน้า 21-24)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center py-8 mt-8 border-t border-gray-800">
-        <p class="text-gray-500">&copy; 2025 - จัดทำเพื่อการทบทวนเนื้อหาก่อนสอบกลางภาค</p>
-    </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const qaContainer = document.getElementById('qa-container');
-            const questionCards = qaContainer.querySelectorAll('.card');
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
-            const totalQuestions = questionCards.length;
-
-            questionCards.forEach(card => {
-                const button = card.querySelector('.question-btn');
-                button.addEventListener('click', () => {
-                    card.classList.toggle('open');
-                    
-                    // Mark as read only on the first open
-                    if (!card.hasAttribute('data-read')) {
-                        card.setAttribute('data-read', 'true');
-                        updateProgress();
-                    }
-                });
-            });
-
-            function updateProgress() {
-                const readCount = qaContainer.querySelectorAll('.card[data-read="true"]').length;
-                const percentage = totalQuestions > 0 ? Math.round((readCount / totalQuestions) * 100) : 0;
-                
-                progressBar.style.width = percentage + '%';
-                progressText.textContent = percentage + '%';
-            }
-        });
-    </script>
-
-</body>
-</ht
+    <header class="bg-white shadow-md py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-teal-700">แบบฝึกหัดทบทวนเนื้อหาก่อนสอบกลางภาค</h1>
+            <p class="mt-2 text-lg text-sl
