@@ -83,6 +83,7 @@
             }
             body {
                 font-size: 12pt;
+                background-color: #fff;
             }
             section {
                 page-break-inside: avoid;
@@ -90,6 +91,20 @@
             .card {
                 box-shadow: none;
                 border: 1px solid #e2e8f0;
+            }
+            .hidden-content {
+                display: block !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            #kill-chain-content > .hidden {
+                display: block !important;
+            }
+            .interactive-element span {
+                display: none;
+            }
+            #analytics-descriptions > div {
+                 margin-top: 0.5rem;
             }
         }
     </style>
@@ -447,4 +462,4 @@
     </script>
 
 </body>
-</html>
+</ht
