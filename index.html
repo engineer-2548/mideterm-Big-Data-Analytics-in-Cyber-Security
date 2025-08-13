@@ -77,18 +77,41 @@
                 height: 350px;
             }
         }
+        @media print {
+            .no-print {
+                display: none;
+            }
+            body {
+                font-size: 12pt;
+            }
+            section {
+                page-break-inside: avoid;
+            }
+            .card {
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50">
 
-    <header class="bg-white shadow-md py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <header class="bg-white shadow-md py-6 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
             <h1 class="text-3xl md:text-4xl font-bold text-teal-700">แบบฝึกหัดทบทวนเนื้อหาก่อนสอบกลางภาค</h1>
             <p class="mt-2 text-lg text-slate-600">Big Data Analytics in Cyber Security</p>
+            <button onclick="window.print()" class="absolute top-1/2 right-4 -translate-y-1/2 bg-teal-600 text-white py-2 px-4 rounded-lg hover:bg-teal-700 transition duration-300 flex items-center gap-2">
+                <span class="w-5 h-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6 18.25m0 0a2.25 2.25 0 01-1.883 2.523l-1.78.445a2.25 2.25 0 01-2.637-2.637l.445-1.78a2.25 2.25 0 012.523-1.883M18 18.25l-1.28-4.429m1.28 4.429a2.25 2.25 0 001.883 2.523l1.78.445a2.25 2.25 0 002.637-2.637l-.445-1.78a2.25 2.25 0 00-2.523-1.883M15 4.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </span>
+                พิมพ์
+            </button>
         </div>
     </header>
 
-    <nav class="sticky-nav shadow-sm">
+    <nav class="sticky-nav shadow-sm no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-center flex-wrap">
                 <a href="#ch1" class="nav-link text-slate-700 font-medium py-3 px-4 text-center">บทที่ 1: Big Data</a>
@@ -342,7 +365,7 @@
 
     </main>
 
-    <footer class="text-center py-6 bg-slate-800 text-slate-400 mt-16">
+    <footer class="text-center py-6 bg-slate-800 text-slate-400 mt-16 no-print">
         <p>สร้างขึ้นเพื่อการทบทวนเนื้อหา ขอให้โชคดีกับการสอบ!</p>
     </footer>
 
